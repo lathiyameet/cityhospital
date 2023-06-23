@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
     return (
@@ -27,19 +28,25 @@ function Header(props) {
       </div>
       <nav id="navbar" className="navbar order-last order-lg-0">
         <ul>
-          <li><a className="nav-link scrollto active" href="index.html">Home</a></li>
+          {/* <li><a className="nav-link scrollto active" href="index.html">Home</a></li>
           <li><a className="nav-link scrollto" href="./pages/departments.html">Departments</a></li>
           <li><a className="nav-link scrollto" href="./pages/doctors.html">Doctors</a></li>
           <li><a className="nav-link scrollto " href="./pages/about.html">About</a></li>
-          <li><a className="nav-link scrollto" href="./pages/contact.html">Contact</a></li>
+          <li><a className="nav-link scrollto" href="./pages/contact.html">Contact</a></li> */}
+          <li> <Link to="/" className='nav-link scrollto'>Home</Link></li>
+          <li>  <Link to="/departments" className='nav-link scrollto'>Departments</Link></li>
+          <li>  <Link to="/doctors" className='nav-link scrollto'>Doctors</Link></li>
+          <li>  <Link to="/about" className='nav-link scrollto'>About</Link></li>
+          <li><Link to="/contact" className='nav-link scrollto'>Contact</Link></li> 
+
         </ul>
         <i className="bi bi-list mobile-nav-toggle" />
       </nav>
-      <a href="./pages/appointment.html" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-        Appointment</a>
-      <a href="#" className="appointment-btn scrollto">
+      <Link to="/appointment" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+        Appointment</Link>
+      <Link to="/Auth" className="appointment-btn scrollto">
         <span className="d-none d-md-inline">Login/ Signup</span>
-      </a>
+      </Link>
     </div>
   </header>
 </div>
