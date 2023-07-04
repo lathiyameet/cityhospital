@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Appointmentadmin from '../admin/containar/Appointmentadmin';
 import Doctorsadmin from '../admin/containar/Doctorsadmin';
 import Departmentsadmin from '../admin/containar/Departmentsadmin';
-import Medicines from '../admin/containar/Medicines';
+import Medicines from '../admin/containar/Medicines/Medicines';
 
 function AdminRoute(props) {
     return (

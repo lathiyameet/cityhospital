@@ -24,7 +24,7 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
 import Departmentsadmin from '../containar/Departmentsadmin';
 import Doctorsadmin from '../containar/Doctorsadmin';
-import Medicines from '../containar/Medicines';
+import Medicines from '../containar/Medicines/Medicines';
 import Appointmentadmin from '../containar/Appointmentadmin';
 import { Link } from 'react-router-dom';
 
