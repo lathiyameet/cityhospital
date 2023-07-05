@@ -73,15 +73,14 @@ function Medicines(props) {
   }
 
 
-  // const handleUpdate = (val) => {
+  const handleUpdate = (val) => {
 
-  //   formik.setValues(val)
-  //   handleClickOpen();
-  //   setUpdate(val)
+    // formik.setValues(val)
+    // handleClickOpen();
+    setUpdate(val)
 
 
-  // }
-
+  }
 
   const columns = [
 
@@ -98,9 +97,9 @@ function Medicines(props) {
           <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
             <DeleteIcon />
           </IconButton>
-          {/* <IconButton aria-label="delete" onClick={() => handleUpdate(params.row)}>
+          <IconButton aria-label="delete" onClick={() => handleUpdate(params.row)}>
             <EditIcon />
-          </IconButton> */}
+          </IconButton>
 
         </>
 
@@ -109,16 +108,11 @@ function Medicines(props) {
 
   ];
 
-
-
-
-
-
   return (
     <>
 
 
-    <Medicinefom />
+    <Medicinefom getdata ={handlesubmitdata} update = {update}/>
       <div style={{ height: "90vh", width: '100%' }}>
         <DataGrid
           rows={dis}

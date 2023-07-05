@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { object, string, number, date, InferType } from 'yup';
 import { Formik, useFormik } from 'formik';
 import Box from '@mui/material/Box';
@@ -9,8 +9,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-function Medicinefom(props) {
+import Medicines from './Medicines';
+function Medicinefom({getdata ,update}) {
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+      if(update){
+        Formik.setValues(update)
+        handleClickOpen();
+      }
+
+    },[update])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -74,13 +83,15 @@ function Medicinefom(props) {
     
           action.resetForm()
           handleClose();
-        //   handlesubmitdata(values);
+          getdata(values);
     
         },
       });
       const { values, handleBlur, handleSubmit, errors, touched, handleChange } = Formik
     return (
         <>
+        {/* <Medicines /> */}
+          
             <Box height={100} />
       <h1>Medicines</h1>
       <Button variant="outlined" onClick={handleClickOpen}>
