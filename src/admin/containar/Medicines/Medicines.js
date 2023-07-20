@@ -25,7 +25,7 @@ function Medicines(props) {
 
 
   const handlesubmitdata = (data) => {
-    console.log(data);
+    // console.log(data);
 
     let rno = Math.floor(Math.random() * 1000);
 

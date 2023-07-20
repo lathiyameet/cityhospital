@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { object, string, number, date, InferType } from 'yup';
+import CoustmButton from '../../components/UI/Button/CoustmButton';
 
 
 function Contact(props) {
@@ -123,7 +124,7 @@ function Contact(props) {
                 <div className="error-message" />
                 <div className="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div className="text-center"><button type="submit">Send Message</button></div>
+              <div className="text-center"><CoustmButton>Send Message</CoustmButton></div>
             </form>
           </div>
         </div>

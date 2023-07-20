@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { object, string, number, date, InferType } from 'yup';
+// import { object, string, number, date, InferType } from 'yup';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import CoustmButton from './UI/Button/CoustmButton';
+import Input from './UI/input/Input';
 
 
 function Auth(props) {
     const [authtype, setAuthtype] = useState('Login')
+    let Navigate = useNavigate()
     // const [password, setpassword] = useState('password')
 
     let authObj = {}, initialval = {};
@@ -15,7 +19,7 @@ function Auth(props) {
             password: yup.string().required()
         }
         initialval = {
-            email: ' ',
+            email: '',
             password: ''
         }
     } else if (authtype == 'Signup') {
@@ -26,7 +30,7 @@ function Auth(props) {
         }
         initialval = {
             name: '',
-            email: ' ',
+            email: '',
             password: ''
         }
     } else {
@@ -34,8 +38,21 @@ function Auth(props) {
             email: yup.string().email().required()
         }
         initialval = {
-            email: ' '
+            email: ''
         }
+    }
+
+    console.log(authObj, initialval);
+
+    const handlelogin = () => {
+        localStorage.setItem("login", 'true')
+        Navigate("/")
+    }
+    const handleSignup = () => {
+
+    }
+    const handleforgrt = () => {
+
     }
 
     let AuthSchema = yup.object(authObj)
@@ -46,17 +63,23 @@ function Auth(props) {
         validationSchema: AuthSchema,
         onSubmit: (values, action) => {
             action.resetForm()
-            alert(JSON.stringify(values, null, 2));
+            if (authtype === 'Login') {
+                handlelogin()
+            } else if (authtype === 'Signup') {
+                handleSignup()
+            } else if (authtype === 'forgrt') {
+                handleforgrt()
+            }
         },
     });
     const { values, touched, handleBlur, handleChange, handleSubmit, errors, } = formik
 
     // console.log(authtype);
-    
+
     return (
-        
+
         <section id="appointment" className="appointment">
-               <div className="container">
+            <div className="container">
                 <div className="section-title">
                     <h2>
                         {
@@ -68,13 +91,13 @@ function Auth(props) {
                         blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                         Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                 </div>
-                <form  onSubmit={handleSubmit} className="php-email-form">
+                <form onSubmit={handleSubmit} className="php-email-form">
                     <div className="row justify-content-center">
                         <div className="col-md-7 form-group">
                             {
-                                authtype === 'Login' || authtype === 'forgrt'? null
+                                authtype === 'Login' || authtype === 'forgrt' ? null
                                     :
-                                    <input type="text"
+                                    <Input type="text"
                                         name="name" className="form-control"
                                         id="name" placeholder="Your Name"
                                         data-rule="minlen:4"
@@ -82,68 +105,80 @@ function Auth(props) {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.name}
+                                        Errorstext={errors.name && touched.name ? errors.name : ''}
                                     />
 
                             }
-                            <span className='error'>{errors.name && touched.name ? errors.name : ''}</span>
+                            {/* <span Errors='error'>{errors.name && touched.name ? errors.name : ''}</span> */}
 
                             <div className="validate" />
                         </div>
                         <div className="col-md-7 form-group mt-3 mt-md-4 ">
-                            <input type="email"
-                                className="form-control" name="email"
+                            <Input type="email"
+                                name="email"
                                 id="email" placeholder="Your Email"
                                 data-rule="email"
-                                data-msg="Please enter a valid email" />
-                            <div className="validate"
+                                data-msg="Please enter a valid email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
+                                Errorstext={errors.email && touched.email ? errors.email : ''}
                             />
-                            <span className='error'>{errors.email && touched.email ? errors.email : ''}</span>
+                            <div className="validate"
 
+                            />
+    
                         </div>
-                      
-                     {
-                           authtype !== 'forgrt'? 
-                           <div className="col-md-7 form-group mt-3 mt-md-4">
-   
-                               <input type="password"
-                                   className="form-control" name="password"
-                                   id="password" placeholder="password"
-                                   data-rule="minlen:4"
-                                   data-msg="Please enter a valid password"
-                                   onChange={handleChange}
-                                   onBlur={handleBlur}
-                                   value={values.password}
-                               />
-                               <span className='error'>{errors.password && touched.password ? errors.password : ''}</span>
-   
-                               <div className="validate" />
-                           </div> : null
-                     }
 
-{
-                authtype === 'Login' ?
-              <>
-                    <span>caeate account <a href='#' onClick={() => setAuthtype('Signup')}> Signup</a></span> 
-                    
-                    <a href='#' onClick={() =>  setAuthtype('forgrt')}> forget password ?</a>
-                    </> :
-                    <span> you have already account ?<a href='#' onClick={() => setAuthtype('Login')}> Login</a></span>
+                        {
+                            authtype !== 'forgrt' ?
+                                <div className="col-md-7 form-group mt-3 mt-md-4">
 
-                    
-            }
+                                    <Input type="password"
+                                        name="password"
+                                        id="password" placeholder="password"
+                                        data-rule="minlen:4"
+                                        data-msg="Please enter a valid password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                        Errorstext={errors.password && touched.password ? errors.password : ''}
+                                    />
+
+
+                                    <div className="validate" />
+                                </div> : null
+                        }
+
+                        {
+                            authtype === 'Login' ?
+                                <>
+                                    <span>caeate account <a href='#' onClick={() => setAuthtype('Signup')}> Signup</a></span>
+
+                                    <a href='#' onClick={() => setAuthtype('forgrt')}> forget password ?</a>
+                                </> :
+                                <span> you have already account ?<a href='#' onClick={() => setAuthtype('Login')}> Login</a></span>
+
+
+                        }
 
 
                     </div>
-                    <div className="text-center"><button type="submit">Login</button></div>
+
+                    {
+                        authtype === 'Login' ?
+                            <div className="text-center"><CoustmButton type='primary' btndisabled={false}>Login</CoustmButton></div> :
+                            authtype === 'Signup' ?
+                                <div className="text-center"><CoustmButton type='secondery'>Sign up</CoustmButton> </div> :
+                                <div className="text-center"><CoustmButton type='outliend'>Submit</CoustmButton> </div>
+                    }
+                    {/* <div className="text-center"><button type="submit" >Login</button></div> */}
 
                 </form>
 
 
             </div>
-          
+
         </section>
     );
 }

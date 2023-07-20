@@ -4,7 +4,6 @@ import Footer from "../user/components/Footer";
 import Header from "../user/components/Header";
 import NotFound from "../user/components/NotFound";
 import Test from "../user/components/Test";
-
 import About from "../user/containar/About/About";
 import Appointment from "../user/containar/Appointment/Appointment";
 import Contact from "../user/containar/Contact/Contact";
@@ -15,6 +14,9 @@ import VisitingDoctor from "../user/containar/Doctors/VisitingDoctor";
 import Home from "../user/containar/Home/Home";
 import { Route, Routes } from 'react-router-dom';
 import Medicines from '../user/containar/MEdicines/Medicines';
+import Private from '../user/components/userRoutes/Private';
+import Privateruotes from '../user/components/userRoutes/Privateruotes';
+import Counter from '../user/containar/Counter';
 
 function UserRoute(props) {
     return (
@@ -34,12 +36,19 @@ function UserRoute(props) {
                     <Route path="Visiting_Doctor" element={<VisitingDoctor />} />
 
                 </Route>
-                <Route path="/medicine" element={<Medicines />} />
+                {/* <Route path="/medicine" element={<Medicines />} />
+                 */}
                 <Route path='*' element={<NotFound />} />
-                <Route></Route>
                 <Route path="/Auth" element={<Auth />} />
                 <Route path="/Auth" element={<Test />} />
-                
+                <Route path='/counter' element={<Counter/>}/>
+
+                {/* <Route path="/routes" element={<Privateruotes />} >
+                    <Route path="Private" element={<Private />} />
+                </Route> */}
+                <Route  element={<Privateruotes />} >
+                    <Route path="medicine" element={<Medicines />} />
+                </Route>
 
             </Routes>
             <Footer />
