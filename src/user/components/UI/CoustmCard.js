@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 
-function CoustmCard({values}) {
+function CoustmCard({values ,btnVal,onclik1}) {
     return (
         
         <Card
             style={{
-                width: '18rem'
+                width: '16rem'
             }}
         >
           {
@@ -27,11 +27,12 @@ function CoustmCard({values}) {
                 </CardSubtitle>
                 <CardText>
                 {values.date}<br/>
-                    {values.desc}
+                    {values.desc.substring(0,100)}
+                    {values.desc.length > 100 ?'...' : ''}
                 </CardText>
                 {
-                    values.btnVal ? <Button>
-                        Button
+                    btnVal ? <Button onClick={ () => onclik1(values.id)}>
+                        {btnVal}
                     </Button> : null
                 }
 

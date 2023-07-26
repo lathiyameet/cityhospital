@@ -1,52 +1,69 @@
 import React, { useEffect, useState } from 'react';
 import ListMedicines from './ListMedicines';
 import CoustmCard from '../../components/UI/CoustmCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_medicinesdata } from '../../../reducx/action/Medicines.action';
+import { cartdata } from '../../../reducx/action/cart.action';
 
 function Medicines(props) {
-  const [data , setdata] = useState ([]);
-  React.useEffect(() => {
-    let locadata = JSON.parse(localStorage.getItem("medicine"));
+  const [data, setdata] = useState([]);
+  const Dispatch = useDispatch()
+  const medicinedata = useSelector(state => state.mediciness)
 
-    console.log('ttttttttt',locadata);
-    if(locadata){
-      setdata(locadata);
-    }
-   
-    
+
+
+  React.useEffect(() => {
+
+    Dispatch(get_medicinesdata());
+
+
   }, [])
 
-  const handlechange = (val) =>{
+  // console.log(medicinedata.medicine);
+
+  const handlechange = (val) => {
     // console.log(val);
 
-    let localData = JSON.parse(localStorage.getItem("medicine"));
+    // let localData = JSON.parse(localStorage.getItem("medicine"));
 
-    let Fdata =localData.filter((v) => 
-    v.name.toLowerCase().includes(val.toLowerCase()) ||
-    // v.price.toString().includes(val) ||
-    // v.date.toString().includes(val) ||
-    v.desc.toLowerCase().includes(val.toLowerCase())
+    let fmdata = medicinedata.medicine
+
+    let fdata = fmdata.filter((v) =>
+      v.name.toLowerCase().includes(val.toLowerCase()) ||
+      v.price.toString().includes(val) ||
+      v.expiry.toString().includes(val) ||
+      v.desc.toLowerCase().includes(val.toLowerCase())
     )
     // console.log(Fdata);
-    setdata(Fdata)
-}
+    setdata(fdata)
+  }
+
+
+  const handlecart = (id) => {
+    Dispatch(cartdata(id))
+    console.log("handlecart called",id);
+  }
   return (
     <section id="medicines" className="medicines">
-    <div className="container">
-      <div className="section-title">   
-        <h2>Medicines</h2>
-        <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
-          blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
-          luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
+      <div className="container">
+        <div className="section-title">
+          <h2>Medicines</h2>
+          <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
+            blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
+            luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
+        </div>
       </div>
-    </div>
-    <div className="container"> 
-      <input type='search' name='search'  onChange={(e) => handlechange(e.target.value)}/>
-      <div className='row'> 
-      <ListMedicines Mdata={data}/>
-     
+      <div className="container">
+        <input type='search' name='search' onChange={(e) => handlechange(e.target.value)} />
+        <div className='row'>
+          <ListMedicines
+            Mdata={medicinedata.medicine}
+            handlecart1={handlecart}
+          />
+
+        </div>
+
       </div>
-         
-    </div>
 
     </section>
 

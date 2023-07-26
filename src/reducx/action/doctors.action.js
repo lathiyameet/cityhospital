@@ -2,10 +2,19 @@ import * as ActionType from '../Actiontype'
 
 export const grt_doctorsData = () => (Dispatch) => {
    try{
-      fetch("http://localhost:3004/doctor")
-      .then((response) => response.json())
-      .then((Data) =>Dispatch({type : ActionType.GET_DOCTOR, payload :Data}))
-      .catch((error) => console.log(error))
+      Dispatch(loadingData(true))
+      setTimeout(function(){
+         fetch("http://localhost:3004/doctor")
+         .then((response) => {
+            if(response.ok){
+               response.json();
+            }
+            throw new Error('something went wrong')
+         })
+         .then((Data) =>Dispatch({type : ActionType.GET_DOCTOR, payload :Data}))
+         .catch((error) => Dispatch(errorData(error.message)))
+      },3000)
+    
    }catch(error){
       console.log(error);
    }
@@ -65,4 +74,12 @@ export const EditDoctordata =(data) => (Dispatch) => {
 
 }
 
+export const loadingData = (satus) => (Dispatch) => {
+   Dispatch({type:ActionType.LOADING_DOCTOR , payload:satus})
+}
+
+export const errorData = (errormsg) => (Dispatch) => {
+   console.log(errormsg);
+   Dispatch({type:ActionType.ERROR_DOCTOR , payload:errormsg})
+}
 

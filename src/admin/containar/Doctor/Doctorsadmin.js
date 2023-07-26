@@ -7,7 +7,7 @@ import DoctorForm from './DoctorForm';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 function Doctorsadmin(props) {
@@ -15,6 +15,9 @@ function Doctorsadmin(props) {
     const Dispatch = useDispatch()
     const doctors = useSelector(state => state.doctors)
 
+
+    console.log(doctors);
+    
     useEffect(() => {
         Dispatch(grt_doctorsData())
     }, [])
@@ -24,7 +27,7 @@ function Doctorsadmin(props) {
         Dispatch(DeleteDoctordata(id))
    }
    const handleUpdate = (data) => {
-    // Dispatch(EditDoctordata(data))
+    Dispatch(EditDoctordata(data)) 
         setUpdate(data)
    }
     const columns = [
@@ -58,14 +61,16 @@ const handleSubmit = (data) => {
     }else{
         Dispatch(AddDoctordata(data));
 
-    }
+    }  
     setUpdate(null)
 }
     return (
         <div>
-
-        <DoctorForm onHandlesumit={handleSubmit} update={update}/>
-            <h2>doctor</h2>
+{   
+    doctors.loading ?<CircularProgress /> :
+    <>
+     <DoctorForm onHandlesumit={handleSubmit} update={update}/>
+            {/* <h2>doctor</h2>   */}
 
             <div style={{ height: "90vh", width: '100%' }}>
                 <DataGrid
@@ -74,6 +79,10 @@ const handleSubmit = (data) => {
                    
                 />
             </div>
+    
+    </>
+}
+       
 
         </div>
     );

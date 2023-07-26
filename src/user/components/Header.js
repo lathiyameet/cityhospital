@@ -1,13 +1,38 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useSelector } from 'react-redux';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
 function Header(props) {
-  let loginData =localStorage.getItem("login")
-   
-  const handlelogut =() => {
+  let loginData = localStorage.getItem("login")
+
+  const cartData = useSelector(state => state.cart)
+  console.log(cartData);
+  let countCart = 0;
+  if (cartData.Itmes) {
+    countCart = cartData.Itmes.reduce((acc, v, i) => acc + v.Qty, 0)
+  }
+
+  console.log(countCart);
+  const handlelogut = () => {
     localStorage.removeItem("login")
     // Navigate('/')
   }
+
+
+
   return (
     <div className="hero_area">
       <div className="main-header">
@@ -18,6 +43,16 @@ function Header(props) {
               <i className="bi bi-phone" /> +91 9988776655
             </div>
             <div className="d-none d-lg-flex social-links align-items-center">
+              <div>
+                <Link to="/cart">
+                  <IconButton aria-label="cart">
+                    <StyledBadge badgeContent={countCart} color="secondary">
+                      <ShoppingCartIcon />
+                    </StyledBadge>
+                  </IconButton>
+                </Link>
+
+              </div>
               <a href="#" className="twitter"><i className="bi bi-twitter" /></a>
               <a href="#" className="facebook"><i className="bi bi-facebook" /></a>
               <a href="#" className="instagram"><i className="bi bi-instagram" /></a>
@@ -54,16 +89,16 @@ function Header(props) {
             </nav>
             <Link to="/appointment" className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
               Appointment</Link>
-              {
-                loginData ? <Link to="/" className="appointment-btn scrollto">
+            {
+              loginData ? <Link to="/" className="appointment-btn scrollto">
                 <span className="d-none d-md-inline" onClick={handlelogut}>Logut</span>
               </Link>
-              :
-              <Link to="/Auth" className="appointment-btn scrollto">
-              <span className="d-none d-md-inline">Login/ Signup</span>
-            </Link>
-              }
-            
+                :
+                <Link to="/Auth" className="appointment-btn scrollto">
+                  <span className="d-none d-md-inline">Login/ Signup</span>
+                </Link>
+            }
+
           </div>
         </header>
       </div>

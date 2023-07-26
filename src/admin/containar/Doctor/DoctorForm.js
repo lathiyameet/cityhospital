@@ -33,7 +33,7 @@ function DoctorForm({onHandlesumit ,update}) {
 
   // let d = new Date();
   // let nd = new Date(d.setDate(d.getDate() - 1))
-  let medicineschema = object({
+  let doctorschema = object({
 
     name: string().required(),
     price: number().typeError('Please Enter Valid Price').required(),
@@ -48,7 +48,7 @@ function DoctorForm({onHandlesumit ,update}) {
            
     
         },
-        validationSchema: medicineschema,
+        validationSchema: doctorschema,
         onSubmit: (values, action) => {
     
           action.resetForm()

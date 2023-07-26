@@ -17,6 +17,7 @@ import Medicines from '../user/containar/MEdicines/Medicines';
 import Private from '../user/components/userRoutes/Private';
 import Privateruotes from '../user/components/userRoutes/Privateruotes';
 import Counter from '../user/containar/Counter';
+import Cart from '../user/containar/Cart/Cart';
 
 function UserRoute(props) {
     return (
@@ -42,6 +43,9 @@ function UserRoute(props) {
                 <Route path="/Auth" element={<Auth />} />
                 <Route path="/Auth" element={<Test />} />
                 <Route path='/counter' element={<Counter/>}/>
+                <Route path='/cart' element={<Cart/>}/>
+
+
 
                 {/* <Route path="/routes" element={<Privateruotes />} >
                     <Route path="Private" element={<Private />} />

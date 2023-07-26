@@ -1,91 +1,36 @@
 import React, { useEffect } from 'react';
-
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { DataGrid } from '@mui/x-data-grid';
 import Medicinefom from './Medicinefom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Addmedicinedata, Deletemedicinedata, Editmedicinedata, get_medicinesdata } from '../../../reducx/action/Medicines.action';
 
 
 function Medicines(props) {
-
-  const [dis, setDis] = React.useState([]);
   const [update, setUpdate] = React.useState(null);
+  const Dispatch =useDispatch()
+  const medicinedata = useSelector(state => state.mediciness)
+
   useEffect(() => {
 
-    let localData = JSON.parse(localStorage.getItem("medicine"));
-
-    if (localData !== null) {
-      setDis(localData)
-    }
+  Dispatch(get_medicinesdata())
 
   }, [])
-
-
-
-
-  const handlesubmitdata = (data) => {
-    // console.log(data);
-
-    let rno = Math.floor(Math.random() * 1000);
-
-    let newData = { id: rno, ...data };
-
-    let localdata = JSON.parse(localStorage.getItem("medicine"));
-
-    console.log(localdata);
-
-    if (localdata === null) {
-      localStorage.setItem("medicine", JSON.stringify([newData]))
-      setDis([newData])
-    } else {
-      if (update) {
-        let udata = localdata.map((v) => {
-          if (v.id === data.id) {
-            return data;
-          } else {
-            return v;
-          }
-        })
-        localStorage.setItem("medicine", JSON.stringify(udata))
-        setDis(udata)
-      } else {
-        localdata.push(newData)
-        localStorage.setItem("medicine", JSON.stringify(localdata))
-        setDis(localdata)
-      }
-
-
-    }
-
-    
-    setUpdate(null)
-  };
-
+  
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem("medicine"));
-
-    let fdata = localData.filter((v, i) => v.id !== id)
-
-    localStorage.setItem("medicine", JSON.stringify(fdata))
-
-    setDis(fdata)
+    Dispatch(Deletemedicinedata(id))
   }
 
-
-  const handleUpdate = (val) => {
-
-    // formik.setValues(val)
-    // handleClickOpen();
-    setUpdate(val)
-
-
+  const handleUpdate = (data) => {
+    Dispatch(Editmedicinedata(data))
+    setUpdate(data)
   }
-
   const columns = [
 
     { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'exdate', headerName: 'Expiry_Date', width: 130 },
+    { field: 'expiry', headerName: 'Expiry_Date', width: 130 },
     { field: 'price', headerName: 'Price', width: 130 },
     { field: 'desc', headerName: 'Description', width: 130 },
     {
@@ -108,14 +53,23 @@ function Medicines(props) {
 
   ];
 
+  const handleSubmit = (data) => {
+    if(update){
+      Dispatch(Editmedicinedata(data))
+  }else{
+      Dispatch(Addmedicinedata(data));
+
+  }
+  setUpdate(null)
+  }
   return (
     <>
 
 
-    <Medicinefom getdata ={handlesubmitdata} update = {update}/>
+    <Medicinefom onHandlesumit={handleSubmit} update={update}/>
       <div style={{ height: "90vh", width: '100%' }}>
         <DataGrid
-          rows={dis}
+          rows={medicinedata.medicine}
           columns={columns}
           initialState={{
             pagination: {

@@ -10,7 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Medicines from './Medicines';
-function Medicinefom({getdata ,update}) {
+function Medicinefom({onHandlesumit ,update}) {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -36,8 +36,8 @@ function Medicinefom({getdata ,update}) {
 
     name: string().required(),
     price: number().typeError('Please Enter Valid Price').required(),
-    exdate: date().min(new Date(), "please entre a valid date").required(),
-    exdate: string().required().test('message', 'Date Must be in Present Or Future',
+    expiry: date().min(new Date(), "please entre a valid date").required(),
+    expiry: string().required().test('message', 'Date Must be in Present Or Future',
       function (val) {
         let currentDate = new Date();
         console.log(currentDate);
@@ -74,7 +74,7 @@ function Medicinefom({getdata ,update}) {
         initialValues: {
           name: '',
           price: '',
-          exdate: '',
+          expiry: '',
           desc: '',
     
         },
@@ -83,7 +83,7 @@ function Medicinefom({getdata ,update}) {
     
           action.resetForm()
           handleClose();
-          getdata(values);
+          onHandlesumit(values);
     
         },
       });
@@ -119,7 +119,7 @@ function Medicinefom({getdata ,update}) {
                 <span className='error' style={{ color: 'red' }}>{errors.name}</span> : null
             }
             <br />
-            <p>Expired date
+          
               <TextField
 
                 margin="dense"
@@ -127,17 +127,17 @@ function Medicinefom({getdata ,update}) {
                 value={values.exdate}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="exdate"
+                name="expiry"
                 // label="Medicine_Expiry_Date"
                 type="date"
                 fullWidth
                 variant="standard"
               />
               {
-                errors.exdate && touched.exdate ?
-                  <span className='error' style={{ color: 'red' }}>{errors.exdate}</span> : null
+                errors.expiry && touched.expiry ?
+                  <span className='error' style={{ color: 'red' }}>{errors.expiry}</span> : null
               }
-            </p>
+            
             <TextField
 
               margin="dense"
