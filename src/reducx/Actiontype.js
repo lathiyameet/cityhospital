@@ -26,3 +26,5 @@ export const ADD_TO_CART ="ADD_TO_CART";
 export const INC_CART ="INC_CART"
 export const DEC_CART ="DEC_CART"
 export const REMOVE_CART ="REMOVE_CART"
+
+export const FAVORITE_MEDICINES ="FAVORITE_MEDICINES"

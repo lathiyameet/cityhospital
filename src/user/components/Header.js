@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -15,8 +16,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-function Header(props) {
+function Header({cartcount1}) {
   let loginData = localStorage.getItem("login")
+
+
 
   const cartData = useSelector(state => state.cart)
   console.log(cartData);
@@ -25,7 +28,17 @@ function Header(props) {
     countCart = cartData.Itmes.reduce((acc, v, i) => acc + v.Qty, 0)
   }
 
-  console.log(countCart);
+
+  const data = JSON.parse(localStorage.getItem('cart')) ;
+let cartcount=0;
+
+  if(data){
+      cartcount =data.reduce((acc, v, i) => acc + v.Qty , 0)
+  }
+
+
+
+  console.log(cartcount);
   const handlelogut = () => {
     localStorage.removeItem("login")
     // Navigate('/')
@@ -50,6 +63,16 @@ function Header(props) {
                       <ShoppingCartIcon />
                     </StyledBadge>
                   </IconButton>
+                </Link>
+                <Link to="/cart1">
+                  <IconButton aria-label="cart">
+                    <StyledBadge badgeContent={cartcount1} color="secondary">
+                      <ShoppingCartIcon />
+                    </StyledBadge>
+                  </IconButton>
+                </Link>
+                <Link to={'/Favorite'}>
+                <FavoriteIcon/>
                 </Link>
 
               </div>
@@ -80,6 +103,7 @@ function Header(props) {
                 <li>  <Link to="/doctors" className='nav-link scrollto'>Doctors</Link></li>
                 <li>  <Link to="/about" className='nav-link scrollto'>About</Link></li>
                 <li>  <Link to="/medicine" className='nav-link scrollto'>Medicines</Link></li>
+                <li>  <Link to="/Medicines1" className='nav-link scrollto'>Medicines1</Link></li>
                 <li><Link to="/contact" className='nav-link scrollto'>Contact</Link></li>
                 <li><Link to="/counter" className='nav-link scrollto'>counter</Link></li>
 

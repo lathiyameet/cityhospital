@@ -1,7 +1,7 @@
 import React from 'react';
 import CoustmCard from '../../components/UI/CoustmCard';
 
-function ListMedicines({ Mdata, handlecart1 }) {
+function ListMedicines({ Mdata, handlecart1,handleFavorit }) {
     console.log(Mdata);
     return (
         <>
@@ -13,6 +13,7 @@ function ListMedicines({ Mdata, handlecart1 }) {
                                 values={v}
                                 btnVal={'ADD to cart'}
                                 onclik1 ={handlecart1}
+                                onclik2={handleFavorit}
                             />
                         </div>
                     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Auth from "../user/components/Auth";
 import Footer from "../user/components/Footer";
 import Header from "../user/components/Header";
@@ -18,11 +18,15 @@ import Private from '../user/components/userRoutes/Private';
 import Privateruotes from '../user/components/userRoutes/Privateruotes';
 import Counter from '../user/containar/Counter';
 import Cart from '../user/containar/Cart/Cart';
+import Cart1 from '../user/containar/Cart/Cart1';
+import Medicines1 from '../user/containar/MEdicines/Medicines1';
+import Favorite from '../user/containar/MEdicines/Favorite';
 
 function UserRoute(props) {
+    const [cartcount ,setcartcount] =useState(0)
     return (
         <>
-            <Header />
+            <Header   cartcount1={cartcount}/>
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
@@ -44,6 +48,9 @@ function UserRoute(props) {
                 <Route path="/Auth" element={<Test />} />
                 <Route path='/counter' element={<Counter/>}/>
                 <Route path='/cart' element={<Cart/>}/>
+                <Route path='/cart1' element={<Cart1/>}/>
+                <Route path='/Medicines1' element={<Medicines1 setcartcount={setcartcount}/>}/>
+                <Route path='/Favorite' element={<Favorite/>}/>
 
 
 

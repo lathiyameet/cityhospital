@@ -62,7 +62,7 @@ function DoctorForm({onHandlesumit ,update}) {
         <>
         {/* <Medicines /> */}
           
-            <Box height={100} />
+           
       <h1>doctor</h1>
       <Button variant="outlined" onClick={handleClickOpen}>
       doctor

@@ -4,6 +4,7 @@ import CoustmCard from '../../components/UI/CoustmCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_medicinesdata } from '../../../reducx/action/Medicines.action';
 import { cartdata } from '../../../reducx/action/cart.action';
+import { Favorite_medicines } from '../../../reducx/action/favorite.action';
 
 function Medicines(props) {
   const [data, setdata] = useState([]);
@@ -43,6 +44,11 @@ function Medicines(props) {
     Dispatch(cartdata(id))
     console.log("handlecart called",id);
   }
+
+  const handleFavorit =(id) => {
+    Dispatch(Favorite_medicines(id))
+    console.log(id);
+  }
   return (
     <section id="medicines" className="medicines">
       <div className="container">
@@ -59,6 +65,7 @@ function Medicines(props) {
           <ListMedicines
             Mdata={medicinedata.medicine}
             handlecart1={handlecart}
+            handleFavorit={handleFavorit}
           />
 
         </div>

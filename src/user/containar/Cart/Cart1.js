@@ -1,37 +1,88 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartQTyADD, cartQTyDelete, cartQTyRemove } from '../../../reducx/action/cart.action';
+import React, { useEffect, useState } from 'react';
 
-function Cart(props) {
-    const Dispatch = useDispatch()
-    const meData = useSelector(state => state.mediciness)
-    const CartData = useSelector(state => state.cart)
-   
+function Cart1(props) {
+    const [medicineData, setmedicineData] = useState([]);
+    const [localdata, setLocaldata] = useState([]);
 
-    
-    const CartItime = CartData.Itmes.map((v) => {
+    useEffect(() => {
+        let localdata = JSON.parse(localStorage.getItem('cart'));
+        setLocaldata(localdata)
+        try {
+            fetch("http://localhost:3004/medicines")
+                .then((response) => response.json())
+                .then((data) => setmedicineData(data))
+                .catch((error) => console.log(error))
+        } catch (error) {
+            console.log(error);
+        }
+    }, [])
+    console.log(localdata);
+    let cartdata = localdata.map((v) => {
+        let medata = medicineData.find((m) => m.id === v.pid)
 
-        let medicines = meData.medicine.find((m) => m.id === v.pid)
+        let Fdata = { ...medata, ...v }
 
+        // localStorage.setItem('cart',JSON.stringify(Fdata))
+        return Fdata
 
-        let FData = { ...medicines, ...v }
-        return FData
     })
-    let totalPrice = CartItime.reduce((acc, value) => acc + value.price * value.Qty, 0);
 
-    console.log(CartItime);
+    let totalPrice = cartdata.reduce((acc, value) => acc + value.price * value.Qty, 0);
+
+
+    console.log("totalPrice :-" +totalPrice);
+
 
     const handleInc = (id) => {
-        // console.log(id);
-        Dispatch(cartQTyADD(id))
+        let  ADDcartdata =localdata.map((v)=> {
+            if(v.pid === id){
+                // let index = localdata.findIndex((v) => v.pid == id)
+
+               return {...v , Qty :v.Qty+1}
+                // let Fdata= localdata[index].Qty++
+         
+                //  console.log(v);
+                
+
+            }else{
+                return v ;
+            }
+           
+        })
+        setLocaldata(ADDcartdata)
+        localStorage.setItem('cart',JSON.stringify(ADDcartdata))
+        
+      
+        
+    }
+    const handleDec = (id) => {
+        let  ADDcartdata =localdata.map((v)=> {
+            if(v.pid === id && v.Qty >1){
+                // let index = localdata.findIndex((v) => v.pid == id)
+         
+                    return {...v , Qty :v.Qty-1}
+            
+                
+              
+                // let Fdata= localdata[index].Qty++
+         
+                //  console.log(v);
+                
+
+            }else{
+                return v ;
+            }
+           
+        })
+        setLocaldata(ADDcartdata)
+        localStorage.setItem('cart',JSON.stringify(ADDcartdata))
+       
     }
 
-    const handleDec = (id) => {
-        // console.log(id);
-        Dispatch(cartQTyDelete(id))
-    }
     const handleRemove = (id) => {
-        Dispatch(cartQTyRemove(id))
+        let fdata = cartdata.filter((v) => v.pid != id)
+        setLocaldata(fdata)
+        localStorage.setItem('cart',JSON.stringify(fdata))
     }
     return (
         <section id="medicines" className="medicines">
@@ -44,16 +95,16 @@ function Cart(props) {
             <div className="container">
                 <div className="card mb-3">
                     {
-                        CartItime.map((v) => {
+                        cartdata.map((v) => {
                             return (
-                               
+
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between">
                                         <div className="d-flex flex-row align-items-center">
 
                                             <div className="ms-3">
                                                 <h5>{v.name}</h5>
-                                                <p className="small mb-0">{v.desc.substring(0, 20)}</p>
+                                                <p className="small mb-0">{v.desc}</p>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center">
@@ -63,16 +114,16 @@ function Cart(props) {
                                                 <button onClick={() => handleInc(v.pid)}>+</button>
                                             </div>
                                             <div style={{ width: 80 }}>
-                                                <h5 className="mb-0">{v.Qty * v.price}</h5>
+                                                <h5 className="mb-0">{v.Qty*v.price}</h5>
                                             </div>
-                                            <a href="#!" style={{ color: '#cecece' }} onClick={() => handleRemove(v.pid)}><i className="fas fa-trash-alt" /></a>
+                                            <a href="#" style={{ color: '#cecece' }} onClick={() => handleRemove(v.pid)}><i className="fas fa-trash-alt" /></a>
                                         </div>
 
                                     </div>
                                 </div>
 
 
-                              
+
                                 /* <div>
                                 <hr className="my-4" />
                                 <div className="row mb-4 d-flex justify-content-between align-items-center">
@@ -117,4 +168,4 @@ function Cart(props) {
     );
 }
 
-export default Cart;
+export default Cart1;

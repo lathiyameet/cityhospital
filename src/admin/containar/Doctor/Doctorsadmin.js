@@ -65,7 +65,8 @@ const handleSubmit = (data) => {
     setUpdate(null)
 }
     return (
-        <div>
+        <div >
+             <Box height={100} />
 {   
     doctors.loading ?<CircularProgress /> :
     <>
@@ -76,7 +77,6 @@ const handleSubmit = (data) => {
                 <DataGrid
                     rows={doctors.doctor}
                     columns={columns}
-                   
                 />
             </div>
     
