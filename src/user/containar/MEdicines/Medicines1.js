@@ -22,6 +22,7 @@ function Medicines1({setcartcount}) {
      const handlecart1 = (id) => {
         let localData= JSON.parse(localStorage.getItem('cart'));
         let cartarr= [];
+        // console.log(localData);
        if(localData === null){
         cartarr.push({
             pid: id,

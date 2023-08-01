@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment } from '../../reducx/action/counter.action';
+import { decrement, increment } from '../../reducx/Slice/counterSlice';
+import { Box } from '@mui/material';
+// import { decrement, increment } from '../../reducx/action/counter.action';
 
 function Counter(props) {
 
@@ -16,12 +18,16 @@ console.log(counterval);
         Dispatch(decrement());
     }
 
-    return (
+    return (<>
+            <Box height={100} />
         <div>
+           
             <button onClick={() => handleINC()}>+</button>
             <span>{counterval.count}</span>
             <button onClick={() => handleDIC()}>-</button>
         </div>
+        </>
+
     );
 }
 

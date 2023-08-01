@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartQTyADD, cartQTyDelete, cartQTyRemove } from '../../../reducx/action/cart.action';
+// import { cartQTyADD, cartQTyDelete, cartQTyRemove } from '../../../reducx/action/cart.action';
+import { QTyRemovecart, decrementQty, incrementQty } from '../../../reducx/Slice/cartSlice';
 
 function Cart(props) {
     const Dispatch = useDispatch()
@@ -23,15 +24,15 @@ function Cart(props) {
 
     const handleInc = (id) => {
         // console.log(id);
-        Dispatch(cartQTyADD(id))
+        Dispatch(incrementQty(id))
     }
 
     const handleDec = (id) => {
         // console.log(id);
-        Dispatch(cartQTyDelete(id))
+        Dispatch(decrementQty(id))
     }
     const handleRemove = (id) => {
-        Dispatch(cartQTyRemove(id))
+        Dispatch(QTyRemovecart(id))
     }
     return (
         <section id="medicines" className="medicines">
@@ -53,7 +54,7 @@ function Cart(props) {
 
                                             <div className="ms-3">
                                                 <h5>{v.name}</h5>
-                                                <p className="small mb-0">{v.desc.substring(0, 20)}</p>
+                                                <p className="small mb-0">{v.desc}</p>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center">

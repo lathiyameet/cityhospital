@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_medicinesdata } from '../../../reducx/action/Medicines.action';
 import { cartdata } from '../../../reducx/action/cart.action';
 import { Favorite_medicines } from '../../../reducx/action/favorite.action';
+import { Addcart } from '../../../reducx/Slice/cartSlice';
 
 function Medicines(props) {
   const [data, setdata] = useState([]);
@@ -41,7 +42,7 @@ function Medicines(props) {
 
 
   const handlecart = (id) => {
-    Dispatch(cartdata(id))
+    Dispatch(Addcart({pid:id , Qty:1}))
     console.log("handlecart called",id);
   }
 
