@@ -22,7 +22,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import VaccinesSharpIcon from '@mui/icons-material/VaccinesSharp';
-import Departmentsadmin from '../containar/Departmentsadmin';
+import Departmentsadmin from '../containar/Department/Departmentsadmin';
 import Doctorsadmin from '../containar/Doctor/Doctorsadmin';
 import Medicines from '../containar/Medicines/Medicines';
 import Appointmentadmin from '../containar/Appointmentadmin';

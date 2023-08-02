@@ -3,8 +3,7 @@ import Dropdown from "../admin/components/Dropdown";
 import Adminpage from "../admin/components/Adminpage";
 import { Route, Routes } from 'react-router-dom';
 import Appointmentadmin from '../admin/containar/Appointmentadmin';
-
-import Departmentsadmin from '../admin/containar/Departmentsadmin';
+import Departmentsadmin from '../admin/containar/Department/Departmentsadmin';
 import Medicines from '../admin/containar/Medicines/Medicines';
 import Doctorsadmin from '../admin/containar/Doctor/Doctorsadmin';
 

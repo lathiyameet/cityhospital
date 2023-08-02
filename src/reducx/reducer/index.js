@@ -6,6 +6,8 @@ import { medicinesReducer } from "./Medicines.reducer";
 import { likeReducerdata } from "./favorite.reducer";
 import counterReduc from "../Slice/counterSlice";
 import cartReducer from "../Slice/cartSlice";
+import departmentReducer from "../Slice/departmentSlice";
+// import { departmentReducer } from "./department.reducer";
 
 
 
@@ -17,6 +19,7 @@ export const rootreducer =combineReducers({
     mediciness:medicinesReducer,
     datalike:likeReducerdata,
     cart:cartReducer,
+    department:departmentReducer
     // like:likeReducerdata
   
 })
