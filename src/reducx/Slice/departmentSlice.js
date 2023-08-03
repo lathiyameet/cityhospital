@@ -10,18 +10,25 @@ const initialState ={
 
 export const FetchDepartment = createAsyncThunk(
     'department/fetch',
+    // setTimeout(() => {
+      
+        
+    // } ,[3000])
     async () => {
+       await new Promise((resolve , reject) => setTimeout(resolve ,3000))
         let response = await getdepartmentdata();
         console.log(response);
         return response.data
     }
 )
+
 export const Deletedepartmentdata = createAsyncThunk(
     'department/delete',
     async (id) => {
-        let response = await deletedepartmentdata(id);
-        console.log(response);
-        return response.data
+        console.log(id);
+     await deletedepartmentdata(id);
+       
+        return id
     }
 )
 
@@ -42,6 +49,14 @@ export const Editdepartmentdata=createAsyncThunk(
         return response.data
     }
 )
+const onerror = (state ,action) => {
+    state.isLoading =false ;
+    state.error = action.error.message;
+}
+const onloading = (state ,action) => {
+    state.isLoading = true
+    state.error = null;
+}
 
 export const departmentSlice = createSlice({
     name:'department',
@@ -49,13 +64,24 @@ export const departmentSlice = createSlice({
     reducers:{},
     extraReducers: (builder) => {
         builder
-        .addCase(FetchDepartment.fulfilled ,(state ,action) => {
+        .addCase(FetchDepartment.pending ,onloading)
+        .addCase(FetchDepartment.fulfilled ,(state,action) => {
+            state.isLoading = false
+            state.error =null
             console.log(action);
             state.department =action.payload
         })
+        .addCase(FetchDepartment.rejected, onerror)
+
+        .addCase(Adddepartmentdata.pending ,onloading)
         .addCase(Adddepartmentdata.fulfilled , (state ,action) => {
             state.department = state.department.concat(action.payload)
+            state.isLoading = false
+            state.error =null
         })
+        .addCase(Adddepartmentdata.rejected, onerror)
+
+        .addCase(Editdepartmentdata.pending ,onloading)
         .addCase(Editdepartmentdata.fulfilled ,(state ,action) => {
           let Udata =  state.department.map((v)=> {
                 if(v.id === action.payload.id){
@@ -64,14 +90,23 @@ export const departmentSlice = createSlice({
                     return v
                 }
             })
+            state.isLoading = false
+            state.error =null
             state.department = Udata
         })
-        .addCase(Deletedepartmentdata.fulfilled ,(state ,action) => {
-           state.department = state.department.filter((v) => v.id !== action.payload)
-        })
-    }
-    
+        .addCase(Editdepartmentdata.rejected, onerror)
 
+        .addCase(Deletedepartmentdata.pending ,onloading)
+        .addCase(Deletedepartmentdata.fulfilled , (state ,action) => {
+            state.isLoading = false
+            state.error =null
+            let Fdata=state.department.filter((v) => v.id !== action.payload);   
+            console.log(Fdata);
+            state.department = Fdata;
+        })
+        .addCase(Deletedepartmentdata.rejected, onerror)
+    }
+   
 })
 
 export default departmentSlice.reducer

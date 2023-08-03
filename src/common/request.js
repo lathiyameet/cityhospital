@@ -28,7 +28,7 @@ export const postRequest = (path,data) => {
       })
   }
   
-export const deleteRequest = (path  ) => {
+export const deleteRequest = (path) => {
     return  sendRequest({
           method: 'DELETE', 
           url: path,

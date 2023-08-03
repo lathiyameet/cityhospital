@@ -32,28 +32,25 @@ function Departments(props) {
             <div className="col-lg-3">
               <ul className="nav nav-tabs flex-column">
                 <li className="nav-item">
-                  <a className="nav-link active show" data-bs-toggle="tab" href="#tab-1">E.N.T</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" data-bs-toggle="tab" href="#tab-2">Cancer</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" data-bs-toggle="tab" href="#tab-3">Physiotherapy</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" data-bs-toggle="tab" href="#tab-4">Dental</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" data-bs-toggle="tab" href="#tab-5">Neurosurgery</a>
+                  {
+                    departments.department.map((v , i) => {
+                      return (
+                        <a className={i === 0 ? 'nav-link active show' : 'nav-link'} data-bs-toggle="tab" href={`#tab-${i + 1}`}>{v.name}</a>
+                      )
+                    })
+                  }
+
                 </li>
               </ul>
             </div>
+
+
             <div className="col-lg-9 mt-4 mt-lg-0">
               <div className="tab-content">
                 {
-                  departments.department.map((v) => {
+                  departments.department.map((v, i) => {
                     return (
-                      <div className="tab-pane active show" id="tab-1">
+                      <div className={i === 0 ? 'tab-pane active show' : 'tab-pane'} id={`tab-${i + 1}`}>
                         <div className="row">
                           <div className="col-lg-8 details order-2 order-lg-1">
                             <h3>{v.name}</h3>

@@ -70,8 +70,10 @@ const handleSubmit = (data) => {
         <div >
              <Box height={100} />
 {   
-    departments.loading ?<CircularProgress /> :
+    departments.isLoading ?<CircularProgress /> :
+    departments.error ? <p>{departments.error}</p>:
     <>
+    
      <DepartmentForm onHandlesumit={handleSubmit} update={update}/>
 
             <div style={{ height: "90vh", width: '100%' }}>
