@@ -1766,3 +1766,13 @@ section {
 .main-header {
   height: 138px;
 }
+
+.light{
+color: white !important;
+background-color: #111 !important;
+
+}
+.dark{
+  color: #000 !important;
+  background-color:white !important;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useSelector } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ThemContext } from '../../context/ThemContext';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -17,6 +18,9 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 function Header({cartcount1}) {
+  const them =useContext(ThemContext) 
+
+  console.log(them);
   let loginData = localStorage.getItem("login")
 
 
@@ -48,8 +52,8 @@ let cartcount=0;
 
   return (
     <div className="hero_area">
-      <div className="main-header">
-        <div id="topbar" className="d-flex align-items-center fixed-top">
+      <div className={`main-header ${them.them}`}>
+        <div id="topbar" className={`d-flex align-items-center fixed-top ${them.them}`}>
           <div className="container d-flex justify-content-between">
             <div className="contact-info d-flex align-items-center">
               <i className="bi bi-envelope" /> <a href="mailto:contact@example.com">cityhospital@example.com</a>
@@ -57,6 +61,7 @@ let cartcount=0;
             </div>
             <div className="d-none d-lg-flex social-links align-items-center">
               <div>
+                <button onClick={() => them.tooglethem(them.them)}>toogle Them</button>
                 <Link to="/cart">
                   <IconButton aria-label="cart">
                     <StyledBadge badgeContent={countCart} color="secondary">

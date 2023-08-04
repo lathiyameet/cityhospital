@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { grt_departmentData } from '../../../reducx/action/department.action';
+// import { grt_departmentData } from '../../../reducx/action/department.action';
 import ListDepartment from './ListDepartment';
+import { FetchDepartment } from '../../../reducx/Slice/departmentSlice';
 
 function Departments(props) {
   const Dispatch = useDispatch()
@@ -9,15 +10,15 @@ function Departments(props) {
 
   React.useEffect(() => {
 
-    Dispatch(grt_departmentData());
+    Dispatch(FetchDepartment());
 
 
   }, [])
 
-  const handlecart = (id) => {
-    // Dispatch(Addcart({pid:id , Qty:1}))
-    console.log("handlecart called", id);
-  }
+  // const handlecart = (id) => {
+  //   // Dispatch(Addcart({pid:id , Qty:1}))
+  //   console.log("handlecart called", id);
+  // }
   return (
     <>
       <section id="departments" className="departments">
@@ -54,8 +55,7 @@ function Departments(props) {
                         <div className="row">
                           <div className="col-lg-8 details order-2 order-lg-1">
                             <h3>{v.name}</h3>
-                            <p className="fst-italic">Vestibulum volutpat luctus quam sed finibus. Sed luctus odio eget ex posuere
-                              hendrerit. Donec iaculis nisi ut purus dapibus</p>
+                           
                             <p>{v.desc}</p>
                           </div>
                           <div className="col-lg-4 text-center order-1 order-lg-2">
