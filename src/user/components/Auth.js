@@ -5,6 +5,8 @@ import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import CoustmButton from './UI/Button/CoustmButton';
 import Input from './UI/input/Input';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../Firebase';
 
 
 function Auth(props) {
@@ -44,12 +46,55 @@ function Auth(props) {
 
     console.log(authObj, initialval);
 
-    const handlelogin = () => {
+    const handlelogin = (values) => {
+
+        signInWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+               
+                const user = userCredential.user;
+                if(user.emailVerified){
+                    console.log('login is successful');
+                } else{
+                    console.log('please verified your Email');
+                }
+
+                console.log();
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
         localStorage.setItem("login", 'true')
         Navigate("/")
     }
-    const handleSignup = () => {
-
+    const handleSignup = (values) => {
+        console.log(values);
+        createUserWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                onAuthStateChanged(auth, (user) => {
+                    sendEmailVerification(auth.currentUser)
+                        .then(() => {
+                            console.log("hello meet");
+                        }).catch((error) => {
+                            const errorCode = error.code;
+                            const errorMessage = error.message;
+                            console.log(errorCode, errorMessage);
+                            // ..
+                        });
+                })
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            });
     }
     const handleforgrt = () => {
 
@@ -64,9 +109,9 @@ function Auth(props) {
         onSubmit: (values, action) => {
             action.resetForm()
             if (authtype === 'Login') {
-                handlelogin()
+                handlelogin(values)
             } else if (authtype === 'Signup') {
-                handleSignup()
+                handleSignup(values)
             } else if (authtype === 'forgrt') {
                 handleforgrt()
             }
@@ -127,7 +172,7 @@ function Auth(props) {
                             <div className="validate"
 
                             />
-    
+
                         </div>
 
                         {

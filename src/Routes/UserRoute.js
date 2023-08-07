@@ -46,6 +46,7 @@ function UserRoute(props) {
                 <Route path='*' element={<NotFound />} />
                 <Route path="/Auth" element={<Auth />} />
                 <Route path="/Auth" element={<Test />} />
+                
                 <Route path='/counter' element={<Counter/>}/>
                 <Route path='/cart' element={<Cart/>}/>
                 <Route path='/cart1' element={<Cart1/>}/>
