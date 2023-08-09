@@ -5,13 +5,13 @@ import { TOGGLE_THEM } from "./ActionType";
 export const ThemContext = createContext();
 
 const initstate = {
-    them : 'light'
+    them : 'dark'
 }
 export const  Themprovider = ({children}) => {
     const [state,dispatch] = useReducer(ThemReducer ,initstate);
 
     const tooglethem = (Them) => {
-        const newthem = Them === 'light' ? 'dark' : 'light'
+        const newthem = Them === 'dark' ? 'light' : 'dark'
 
         dispatch({type:TOGGLE_THEM ,payload:newthem})
     }

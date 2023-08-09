@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemContext } from '../../../context/ThemContext';
 const doctorData = [
   {
     id: 1,
@@ -32,12 +33,13 @@ const doctorData = [
 
 ]
 function Doctors(props) {
+  const them =useContext(ThemContext) 
   // const [doctor ,setdoctor] = useState (doctorData)
   return (
-    <section id="doctors" className="doctors">
+    <section id="doctors" className={`doctors ${them.them}`}>
       <div className="container">
         <div className="section-title">
-          <h2>Doctors</h2>
+          <h2 className={`${them.them}`}>Doctors</h2>
           <p>Duis sagittis rutrum neque, quis tincidunt arcu pretium ac. Suspendisse sem risus, molestie vitae arcu et,
             tincidunt viverra erat. Quisque in lectus id nulla viverra sodales in a risus. Aliquam ut sem ex. Duis viverra
             ipsum lacus, ut pharetra arcu sagittis nec. Phasellus a eleifend elit.</p>

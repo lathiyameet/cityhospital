@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemContext } from '../../../context/ThemContext';
 
 function About(props) {
+  const them =useContext(ThemContext) 
     return (
-   <section id="about" classname="about">
+   <section id="about" classname="about" className={`${them.them}`}>
   <div classname="container">
     <div classname="row">
       <div classname="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center px-lg-5 abouttop">

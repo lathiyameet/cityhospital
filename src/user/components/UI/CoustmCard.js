@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { ThemContext } from '../../../context/ThemContext';
 
 function CoustmCard({ values, btnVal, onclik1,onclik2 }) {
+    const them =useContext(ThemContext) 
     return (
 
         <Card
@@ -19,8 +21,8 @@ function CoustmCard({ values, btnVal, onclik1,onclik2 }) {
                 /> :
                     null
             }
-            <CardBody>
-                <CardTitle tag="h5">
+            <CardBody className={`${them.them}`}>
+                <CardTitle tag="h5" className={`${them.them}`}>
                     {values.name}
                     <FavoriteBorderIcon 
                         style={{
@@ -32,11 +34,11 @@ function CoustmCard({ values, btnVal, onclik1,onclik2 }) {
                     />
                 </CardTitle>
                 <CardSubtitle
-                    className="mb-2 text-muted"
+                    className={`mb-2 text-muted ${them.them}`}
                     tag="h6"
                 >  {values.price}
                 </CardSubtitle>
-                <CardText>
+                <CardText className={`${them.them}`}>
                     {values.date}<br />
                     {values.desc.substring(0, 100)}
                     {values.desc.length > 100 ? '...' : ''}

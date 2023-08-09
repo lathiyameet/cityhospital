@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Card, CardBody, CardText, CardTitle, } from 'reactstrap';
+import { ThemContext } from '../../../context/ThemContext';
 
 
 // import { Link } from 'react-router-dom';
@@ -43,11 +44,12 @@ const doctorData = [
 
 function Doctor(props) {
   const { id } = useParams()
+  const them =useContext(ThemContext) 
 
   let Fdata = doctorData.filter((v) => v.id === parseInt(id))
   console.log(Fdata);
   return (
-    <div className="row">
+    <div className={`row ${them.them}`}>
       <div className="col-lg-6">
         {/* <p>{id}</p> */}
         <div className="member d-flex align-items-start">

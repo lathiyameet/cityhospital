@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemContext } from '../../context/ThemContext';
+
 
 function Footer(props) {
+  const them =useContext(ThemContext) 
     return (
-<footer id="footer">
+<footer id="footer" className={`${them.them}`}>
   <div className="container d-md-flex py-4">
     <div className="me-md-auto text-center text-md-start">
       <div>

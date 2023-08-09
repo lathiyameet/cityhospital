@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 // import { object, string, number, date, InferType } from 'yup';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import CoustmButton from './UI/Button/CoustmButton';
 import Input from './UI/input/Input';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../Firebase';
+import { useDispatch } from 'react-redux';
+import { ForgetReqest, LoginReqest, signupReqest } from '../../reducx/action/auth.action';
+import { ThemContext } from '../../context/ThemContext';
 
 
 function Auth(props) {
     const [authtype, setAuthtype] = useState('Login')
     let Navigate = useNavigate()
+    const Dispatch = useDispatch();
     // const [password, setpassword] = useState('password')
+    const them = useContext(ThemContext)
 
     let authObj = {}, initialval = {};
     if (authtype == 'Login') {
@@ -28,7 +33,13 @@ function Auth(props) {
         authObj = {
             name: yup.string().required(),
             email: yup.string().email().required(),
-            password: yup.string().required()
+            password: yup.string()
+                .required("No password provided.")
+                .min(8, "Password is too short - should be 8 chars minimum.")
+                .matches(
+                    /^(?=.*[-\#\$\.\%\&\@\!\+\=\<\>\*])(?=.*[a-zA-Z])(?=.*\d).{8,12}$/,
+                    "Password can only contain Latin letters."
+                ),
         }
         initialval = {
             name: '',
@@ -48,55 +59,16 @@ function Auth(props) {
 
     const handlelogin = (values) => {
 
-        signInWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                // Signed in 
-               
-                const user = userCredential.user;
-                if(user.emailVerified){
-                    console.log('login is successful');
-                } else{
-                    console.log('please verified your Email');
-                }
+        Dispatch(LoginReqest(values))
 
-                console.log();
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-        localStorage.setItem("login", 'true')
-        Navigate("/")
     }
     const handleSignup = (values) => {
         console.log(values);
-        createUserWithEmailAndPassword(auth, values.email, values.password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                console.log(user);
-                onAuthStateChanged(auth, (user) => {
-                    sendEmailVerification(auth.currentUser)
-                        .then(() => {
-                            console.log("hello meet");
-                        }).catch((error) => {
-                            const errorCode = error.code;
-                            const errorMessage = error.message;
-                            console.log(errorCode, errorMessage);
-                            // ..
-                        });
-                })
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
+        Dispatch(signupReqest(values))
+
     }
-    const handleforgrt = () => {
+    const handleforgrt = (values) => {
+        Dispatch(ForgetReqest(values))
 
     }
 
@@ -113,7 +85,7 @@ function Auth(props) {
             } else if (authtype === 'Signup') {
                 handleSignup(values)
             } else if (authtype === 'forgrt') {
-                handleforgrt()
+                handleforgrt(values)
             }
         },
     });
@@ -123,10 +95,10 @@ function Auth(props) {
 
     return (
 
-        <section id="appointment" className="appointment">
+        <section id="appointment" className={`appointment ${them.them}`}>
             <div className="container">
                 <div className="section-title">
-                    <h2>
+                    <h2 className={`${them.them}`}>
                         {
                             authtype === 'Login' ? 'Login' : 'Signup'
                         }

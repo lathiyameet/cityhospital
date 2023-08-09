@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ListMedicines from './ListMedicines';
 import CoustmCard from '../../components/UI/CoustmCard';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,8 +6,10 @@ import { get_medicinesdata } from '../../../reducx/action/Medicines.action';
 import { cartdata } from '../../../reducx/action/cart.action';
 import { Favorite_medicines } from '../../../reducx/action/favorite.action';
 import { Addcart } from '../../../reducx/Slice/cartSlice';
+import { ThemContext } from '../../../context/ThemContext';
 
 function Medicines(props) {
+  const them =useContext(ThemContext) 
   const [data, setdata] = useState([]);
   const Dispatch = useDispatch()
   const medicinedata = useSelector(state => state.mediciness)
@@ -51,8 +53,8 @@ function Medicines(props) {
     console.log(id);
   }
   return (
-    <section id="medicines" className="medicines">
-      <div className="container">
+    <section id="medicines" className={`medicines ${them.them}`}>
+      <div className={`container ${them.them}`}>
         <div className="section-title">
           <h2>Medicines</h2>
           <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus

@@ -1,11 +1,12 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import { object, string, number, date, InferType } from 'yup';
 import CoustmButton from '../../components/UI/Button/CoustmButton';
+import { ThemContext } from '../../../context/ThemContext';
 
 
 function Contact(props) {
-
+  const them =useContext(ThemContext) 
 
   let userSchema = object({
     name: string().required(),
@@ -36,10 +37,10 @@ function Contact(props) {
   });
   const { values, touched, handleBlur, handleChange, handleSubmit, errors, } = formik
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className={`contact ${them.them}`}>
       <div className="container">
         <div className="section-title">   
-          <h2>Contact</h2>
+          <h2  className={`contact ${them.them}`}>Contact</h2>
           <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
             blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
             luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>
@@ -48,28 +49,28 @@ function Contact(props) {
       <div className="container">
         <div className="row mt-5">
           <div className="col-lg-4">
-            <div className="info">
+            <div className={`info ${them.them}`}>
               <div className="address">
                 <i className="bi bi-geo-alt" />
-                <h4>Location:</h4>
-                <p> F-505, Inovative Plazza New Delhi, India</p>
+                <h4 className={`${them.them}`}>Location:</h4>
+                <p className={`${them.them}`}> F-505, Inovative Plazza New Delhi, India</p>
               </div>
               <div className="email">
                 <i className="bi bi-envelope" />
-                <h4>Email:</h4>
-                <p>cityhospital@example.com</p>
+                <h4 className={`${them.them}`}>Email:</h4>
+                <p className={`${them.them}`}>cityhospital@example.com</p>
               </div>
               <div className="phone">
                 <i className="bi bi-phone" />
-                <h4>Call:</h4>
-                <p>+91 9988776655</p>
+                <h4 className={`${them.them}`}>Call:</h4>
+                <p className={`${them.them}`}>+91 9988776655</p>
               </div>
             </div>
           </div>
           <div className="col-lg-8 mt-5 mt-lg-0">
-            <form onSubmit={handleSubmit} className="php-email-form">
-              <div className="row">
-                <div className="col-md-6 form-group">
+            <form onSubmit={handleSubmit} className={`php-email-form ${them.them}`}>
+              <div className={`row ${them.them}`}>
+                <div className={`col-md-6 form-group ${them.them}`}>
                   <input
                     type="text"
                     name="name"

@@ -1,50 +1,52 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { H1, H2, H4 ,H3} from '../../components/UI/Heading/Heading.styled';
 import { Pteg } from '../../components/UI/subtitles/subtitles.styled';
 import Icon from '../../components/UI/icons/Icon';
 import Subtitles from '../../components/UI/subtitles/Subtitles';
+import { ThemContext } from '../../../context/ThemContext';
 
 function Home(props) {
+  const them =useContext(ThemContext) 
     return (
        <>
      
-  <section id="hero" className="d-flex align-items-center">
+  <section id="hero" className={`d-flex align-items-center ${them.them}`}>
     <div className="container">
       <H1>Welcome to City <br />Multispeciality Hospital</H1>
       <H2>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</H2>
     </div>
   </section>
-  <main id="main">
+  <main id="main" className={`${them.them}`}>
     <section id="why-us" className="why-us">
     </section>
-    <section id="counts" className="counts">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3 col-md-6">
-            <div className="count-box">
+    <section id="counts" className={`counts ${them.them}`}>
+      <div className={`container ${them.them}`}>
+        <div className={`row ${them.them}`}>
+        <div className={`col-lg-3 col-md-6  ${them.them}`}>
+            <div className={`count-box ${them.them}`}>
               <Icon className="fas fa-user-md" />
-              <span>23</span>
+              <span className={`${them.them}`}>23</span>
               <Subtitles>Doctors</Subtitles>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mt-5 mt-md-0">
-            <div className="count-box">
+            <div className={`count-box ${them.them}`}>
               <Icon className="far fa-hospital" />
-              <span>18</span>
+              <span className={`${them.them}`}>18</span>
               <Subtitles>Departments</Subtitles>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div className="count-box">
+            <div className={`count-box ${them.them}`}>
               <Icon className="fas fa-heartbeat" />
-              <span>980</span>
+              <span className={`${them.them}`}>980</span>
               <Subtitles>Patients</Subtitles>
             </div>
           </div>
           <div className="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div className="count-box">
+            <div className={`count-box ${them.them}`}>
               <Icon className="fas fa-award" />
-              <span>12</span>
+              <span className={`${them.them}`}>12</span>
               <Subtitles>Awards</Subtitles>
             </div>
           </div>
@@ -54,7 +56,7 @@ function Home(props) {
     <section id="services" className="services">
       <div className="container">
         <div className="section-title">
-          <H2>Our Facilities</H2>
+          <H2 className= {`${them.them}`}>Our Facilities</H2>
           <Subtitles>Nunc aliquam eget nibh eu euismod. Donec dapibus blandit quam volutpat sollicitudin. Fusce tincidunt sit
             amet ex in volutpat. Donec lacinia finibus tortor. Curabitur luctus eleifend odio. Phasellus placerat mi et
             suscipit pulvinar. Donec quis tristique lectus.</Subtitles>
@@ -63,7 +65,7 @@ function Home(props) {
           <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div className="icon-box">
               <div className="icon"><i className="fas fa-hospital-alt" /></div>
-              <H4><a href>24x7 Emergency Available</a></H4>
+              <H4 ><a href >24x7 Emergency Available</a></H4>
               <Subtitles>Nullam accumsan, velit et porta consequat, purus leo congue risus</Subtitles>
             </div>
           </div>
@@ -105,18 +107,18 @@ function Home(props) {
         </div>
       </div>
     </section>
-    <section id="testimonials" className="testimonials">
+    <section id="testimonials" className={`testimonials ${them.them}`}>
       <div className="container">
-        <div className="section-title"><H2>Reviews</H2></div>
+        <div className="section-title"><H2 className= {`${them.them}`}>Reviews</H2></div>
         <div className="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay={100}>
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <div className="testimonial-wrap">
-                <div className="testimonial-item">
+                <div className={`testimonial-item ${them.them}`}>
                   <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt />
-                  <H3>Jacob Wilsson</H3>
+                  <H3  className= {`${them.them}`}>Jacob Wilsson</H3>
                   <H4>Writer</H4>
-                  <Subtitles>
+                  <Subtitles className= {`${them.them}`}>
                     <i className="bx bxs-quote-alt-left quote-icon-left" />
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere, lacus ac tincidunt tempor,
                     sapien justo ultrices ante, vel pharetra turpis ex ac nisi. Aliquam tempor egestas turpis, nec
@@ -199,7 +201,7 @@ function Home(props) {
     <section id="gallery" className="gallery">
       <div className="container">
         <div className="section-title">
-          <H2>Gallery</H2>
+          <H2 className= {`${them.them}`}>Gallery</H2>
           <Subtitles>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
             consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit
             in iste officiis commodi quidem hic quas.</Subtitles>
