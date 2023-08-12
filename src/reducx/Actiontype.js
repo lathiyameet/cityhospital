@@ -41,5 +41,10 @@ export const UPDTE_DEPARTMENT="UPDTE_DOCTOR"
 
 
 export const SIGNUP_REQEST = "SIGNUP_REQEST"
+export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
 export const LOGIN_REQEST = "LOGIN_REQEST"
+export const LOGGDE_IN = "LOGGDE_IN"
 export const FORGET_REQEST = "FORGET_REQEST"
+export const AUTH_ERROR ="AUTH_ERROR"
+export const LOG_OUt ="LOG_OUt"
+export const LOGGED_OUt ="LOGGED_OUt"

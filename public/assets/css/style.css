@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #2c4964;
   white-space: nowrap;
   transition: 0.3s;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid transparent;
   padding: 5px 2px;
 }
 
@@ -1769,10 +1769,16 @@ section {
 
 .light{
 color: white !important;
-background-color: #111 !important;
+background-color: rgb(95, 94, 94) !important;
 
 }
 .dark{
   color: #000 !important;
   background-color:white !important;
 }
+
+.light .departments .nav-link.active:hover{
+  /* color:#FF6337 ; */
+  background: #FF6337 !important;
+}
+

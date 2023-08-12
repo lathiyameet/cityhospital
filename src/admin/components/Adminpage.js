@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
 
 function Adminpage(props) {
-    let loginData =localStorage.getItem("login")
+    const auth = useSelector(state => state.auth)
+    if(auth.user.email === 'lathiyameet80@gmail.com'){
+        
+    }
     return (
-        loginData ? <Outlet/> : <Navigate  to ={"/Auth"} replace/>
+        auth.user? <Outlet/> : <Navigate  to ={"/Auth"} replace/>
     );
 }
 

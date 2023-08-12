@@ -9,6 +9,9 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Themprovider } from "./context/ThemContext";
 import { persistor, store } from "./reducx/store";
+import Alert from "./user/components/Alert/Alert";
+import { SnackbarProvider } from "notistack";
+
 
 
 
@@ -16,18 +19,22 @@ import { persistor, store } from "./reducx/store";
 function App() {
 
   return (
-    <Provider store={store}>
-      <Themprovider>
-        <PersistGate loading={null} persistor={persistor}>
-          <Routes>
-            <Route path="/*" element={<UserRoute />} />
-            <Route element={<Adminpage />}>
-              <Route path="/admin/*" element={<AdminRoute />} />
-            </Route>
-          </Routes>
-        </PersistGate>
-      </Themprovider>
-    </Provider>
+    <SnackbarProvider maxSnack={3}>
+      <Provider store={store}>
+        <Themprovider>
+          <PersistGate loading={null} persistor={persistor}>
+            <Alert />
+            <Routes>
+              <Route path="/*" element={<UserRoute />} />
+              <Route element={<Adminpage />}>
+              
+                <Route path="/admin/*" element={<AdminRoute />} />
+              </Route>
+            </Routes>
+          </PersistGate>
+        </Themprovider>
+      </Provider>
+    </SnackbarProvider>
   );
 }
 

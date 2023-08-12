@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../../Firebase';
 
 export const singAPI = (values) => {
@@ -27,11 +27,11 @@ export const singAPI = (values) => {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
                 if (errorCode.localeCompare("auth/email-already-in-use") === 0) {
-                    reject("Email already registar.");
+                    reject({Message :"Email already registar."});
                 } else if (errorCode.localeCompare("auth/network-request-failed") === 0) {
-                    reject("please check your internet connection.");
+                    reject({Message:"please check your internet connection."});
                 } else if (errorCode.localeCompare("auth/weak-password") === 0) {
-                    reject("Your password is weak")
+                    reject({Message:"Your password is weak"})
                 }
                 // ..
             });
@@ -47,11 +47,11 @@ export const LoginAPI = (values) => {
 
                 const user = userCredential.user;
                 if (user.emailVerified) {
-                    reslove({ message: 'login is successful' });
+                    reslove({ user,Message: 'login is successful' });
                     // localStorage.setItem("login", 'true')
                     // Navigate("/")
                 } else {
-                    reject({ message: 'please verified your Email' });
+                    reject({ Message: 'please verified your Email' });
                 }
 
 
@@ -61,11 +61,11 @@ export const LoginAPI = (values) => {
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage)
                 if (errorCode.localeCompare("auth/user-not-found") === 0) {
-                    reject("Email is not registar");
+                    reject({Message :"Email is not registar"});
                 } else if (errorCode.localeCompare("auth/wrong-password") === 0) {
-                    reject("Your password is wrong");
+                    reject({Message :"Your password is wrong"});
                 } else if (errorCode.localeCompare("auth/network-request-failed") === 0) {
-                    reject("please check your internet connection.");
+                    reject({Message :"please check your internet connection."});
                 }
             });
     })
@@ -76,18 +76,30 @@ export const ForgetAPI = (values) => {
     return new Promise((reslove, reject) => {
         sendPasswordResetEmail(auth, values.email)
             .then(() => {
-                reslove("Forget password");
+                reslove({Message :"Forget password"});
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // ..
                 if (errorCode.localeCompare("auth/user-not-found") === 0) {
-                    reject("Email is not registar");
+                    reject({Message :"Email is not registar"});
                 } else if (errorCode.localeCompare("auth/network-request-failed") === 0) {
-                    reject("please check your internet connection.");
+                    reject({Message :"please check your internet connection."});
                 }
             });
+    })
+
+}
+
+export const LogoutAPI = () => {
+    return new Promise((reslove, reject) => {
+        signOut(auth)
+        .then(() => {
+            reslove({Message :"Sign-out successful."});
+          }).catch((error) => {
+            // An error happened.
+          });
     })
 
 }

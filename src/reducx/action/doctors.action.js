@@ -7,7 +7,7 @@ export const grt_doctorsData = () => (Dispatch) => {
       Dispatch(loadingData(true))
       setTimeout(function(){
          getdoctorsdata()
-         .then((response) =>Dispatch({type : ActionType.GET_DOCTOR, payload :response.data}))
+         .then((response) =>   Dispatch({type : ActionType.GET_DOCTOR, payload :response.data}))
          .catch((error) => Dispatch(errorData(error.message)))
 
          // fetch("http://localhost:3004/doctor")
