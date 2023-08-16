@@ -2,13 +2,17 @@
 import { Putdepartmentdata, deletedepartmentdata, getdepartmentdata, postdepartmentdata } from '../../common/apis/department.apis'
 
 import * as ActionType from '../Actiontype'
+import { setAlert } from '../Slice/alertSlice'
 
 export const grt_departmentData = () => (Dispatch) => {
    try {
       Dispatch(loadingData(true))
       setTimeout(function () {
          getdepartmentdata()
-            .then((response) => Dispatch({ type: ActionType.GET_DEPARTMENT, payload:response.data}))
+            .then((response) =>{
+               Dispatch(setAlert({text :"Git departmentData Data." , color:'success'}))
+               Dispatch({ type: ActionType.GET_DEPARTMENT, payload:response.data})
+            })
             // .catch((error) => Dispatch(errorData(error.message)))
 
          // fetch("http://localhost:3004/department")
@@ -27,7 +31,11 @@ export const Adddepartmentdata = (Data) => (Dispatch) => {
    // console.log(Data);
    try {
         postdepartmentdata(Data)
-              .then((response) =>Dispatch({type : ActionType.ADD_DEPARTMENT, payload :response.data}))
+              .then((response) =>{
+               Dispatch(setAlert({text :"Add departmentData Data." , color:'success'}))
+
+               Dispatch({type : ActionType.ADD_DEPARTMENT, payload :response.data})
+            })
 
       // fetch("http://localhost:3004/department", {
       //    method: 'POST',
@@ -50,7 +58,10 @@ export const Adddepartmentdata = (Data) => (Dispatch) => {
 export const Deletedepartmentdata = (id) => (Dispatch) => {
    try {
        deletedepartmentdata(id)
-        .then(Dispatch({type:ActionType.DELETE_DEPARTMENT ,payload:id}))
+        .then(() => {
+         Dispatch(setAlert({text :"Delete departmentdata Data." , color:'success'}))
+         Dispatch({type:ActionType.DELETE_DEPARTMENT ,payload:id})
+      })
        .catch((error) => console.log(error))
       // fetch("http://localhost:3004/department/" + id, {
       //    method: 'DELETE',
@@ -68,7 +79,10 @@ export const Deletedepartmentdata = (id) => (Dispatch) => {
 export const Editdepartmentdata = (data) => (Dispatch) => {
    try {
         Putdepartmentdata   (data)
-        .then(Dispatch({type:ActionType.UPDTE_DEPARTMENT ,payload:data}))
+        .then(() => {
+         Dispatch(setAlert({text :"Updte department Data." , color:'success'}))
+         Dispatch({type:ActionType.UPDTE_DEPARTMENT ,payload:data})
+      })
         .catch((error) => console.log(error))
       // fetch("http://localhost:3004/department/" + data.id, {
       //    method: 'PUT',

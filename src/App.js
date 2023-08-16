@@ -11,6 +11,7 @@ import { Themprovider } from "./context/ThemContext";
 import { persistor, store } from "./reducx/store";
 import Alert from "./user/components/Alert/Alert";
 import { SnackbarProvider } from "notistack";
+import './rsuite.css';
 
 
 

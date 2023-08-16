@@ -56,7 +56,7 @@ function Medicines(props) {
     <section id="medicines" className={`medicines ${them.them}`}>
       <div className={`container ${them.them}`}>
         <div className="section-title">
-          <h2>Medicines</h2>
+          <h2 className={`${them.them}`}>Medicines</h2>
           <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
             blandit quam volutpat sollicitudin. Aenean ac turpis ante. Mauris velit sapien, aliquet aliquet rhoncus quis,
             luctus at neque. Mauris sit amet massa sed orci vehicula facilisis.</p>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
@@ -9,7 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ThemContext } from '../../context/ThemContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import {  LogoutReqest } from '../../reducx/action/auth.action';
-
+import { Drawer, Button, Placeholder } from 'rsuite';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -54,12 +54,14 @@ function Header({ cartcount1 }) {
   Dispatch(LogoutReqest())
 }
 
+
 // console.log(cartcount);
 // const handlelogut = () => {
 //   localStorage.removeItem("login")
 //   // Navigate('/')
 // }
 
+const [open, setOpen] = useState(false);
 
 return (
 
@@ -121,7 +123,7 @@ return (
 
 
             </ul>
-            <i className="bi bi-list mobile-nav-toggle" />
+             <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i> 
           </nav>
           <Link to="/appointment" className="appointment-btn scrollto"><span className=" d-md-inline">Make an</span>
             Appointment</Link>
@@ -145,7 +147,27 @@ return (
               </Link>
           }
 
-        </div>
+        </div>   
+
+        <div className='drawer'>
+                        <Drawer backdrop={"static"} open={open} onClose={() => setOpen(false)}>
+                            <Drawer.Header>
+                                <Drawer.Title>Navbar List</Drawer.Title>
+                            </Drawer.Header>
+                            <Drawer.Body>
+                                <nav>
+                                    <ul>
+                                        <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
+                                        <li><Link to="/departments" onClick={() => setOpen(false)}>Departments</Link></li>
+                                        <li><Link to="/doctors" onClick={() => setOpen(false)}>Doctors</Link></li>
+                                        <li><Link to="/about" onClick={() => setOpen(false)}>About</Link></li>
+                                        <li><Link to="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+                                        <li><Link to="/medicine" onClick={() => setOpen(false)}>Medicine</Link></li>
+                                    </ul>
+                                </nav>
+                            </Drawer.Body>
+                        </Drawer>
+                    </div>
       </header>
     </div>
 

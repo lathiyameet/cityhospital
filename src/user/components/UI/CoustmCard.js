@@ -3,8 +3,8 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'react
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { ThemContext } from '../../../context/ThemContext';
 
-function CoustmCard({ values, btnVal, onclik1,onclik2 }) {
-    const them =useContext(ThemContext) 
+function CoustmCard({ values, btnVal, onclik1, onclik2 }) {
+    const them = useContext(ThemContext)
     return (
 
         <Card
@@ -51,6 +51,42 @@ function CoustmCard({ values, btnVal, onclik1,onclik2 }) {
 
             </CardBody>
         </Card>
+
+
+        // values.map((v) => {
+        //     return (
+        //         <div className="product">
+        //             <div className="product-card">
+        //                 <h2 className="name">{v.name}</h2>
+        //                 <span className="price">${v.price}.00</span>
+        //                 <a className="popup-btn">Quick View</a>
+        //                 {/* <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fmedicine&psig=AOvVaw04IfeMmb8rzsiMJG_epTPe&ust=1692109551046000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIChrpOv3IADFQAAAAAdAAAAABAE" className="product-img" alt /> */}
+        //             </div>
+        //             <div className="popup-view">
+        //                 <div className="popup-card">
+        //                     <a><i className="fas fa-times close-btn" /></a>
+        //                     <div className="product-img">
+        //                         {/* <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fmedicine&psig=AOvVaw04IfeMmb8rzsiMJG_epTPe&ust=1692109551046000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIChrpOv3IADFQAAAAAdAAAAABAE" alt /> */}
+        //                     </div>
+        //                     <div className="info">
+        //                         <h2>{v.name}
+        //                             {/* {
+        //                                 v.id === localDataIcon ?
+        //                                     <FavoriteIcon style={{ color: "#FF6337", cursor: 'pointer' }} onClick={handleRemoveicon} />
+        //                                     :
+        //                                     <FavoriteBorderIcon style={{ color: "#FF6337", cursor: 'pointer' }} onClick={() => Onicon(v.id)} />
+        //                             } */}
+        //                         </h2>
+        //                         <p>{v.desc}</p>
+        //                         <span className="price">$ {v.price}.00</span>
+        //                         <a href="#" onClick={() => onclik1(v.id)} className="add-cart-btn">Add to Cart</a>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // })
+
     );
 }
 
