@@ -9,6 +9,7 @@ import cartReducer from "../Slice/cartSlice";
 import departmentReducer from "../Slice/departmentSlice";
 import alertReducr from "../Slice/alertSlice";
 import { authReduc } from "./auth.reducer";
+import  appointmentReducer from "../Slice/appontmentSlice";
 // import { departmentReducer } from "./department.reducer";
 
 
@@ -21,9 +22,11 @@ export const rootreducer =combineReducers({
     doctors:doctorReducer,
     mediciness:medicinesReducer,
     datalike:likeReducerdata,
+    apt : appointmentReducer,
     cart:cartReducer,
     department:departmentReducer,
-    auth:authReduc
+    auth:authReduc,
+ 
     // like:likeReducerdata
   
 })

@@ -119,7 +119,7 @@ return (
               <li>  <Link to="/medicine" className={`nav-link scrollto ${them.them}`}>Medicines</Link></li>
               {/* <li>  <Link to="/Medicines1" className={`nav-link scrollto ${them.them}`}>Medicines1</Link></li> */}
               <li><Link to="/contact" className={`nav-link scrollto ${them.them}`}>Contact</Link></li>
-              {/* <li><Link to="/counter" className={`nav-link scrollto ${them.them}`}>counter</Link></li> */}
+              <li><Link to="/counter" className={`nav-link scrollto ${them.them}`}>counter</Link></li>
 
 
             </ul>
