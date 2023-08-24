@@ -14,6 +14,7 @@ function Favorite(props) {
     const them =useContext(ThemContext) 
 
     const handleRemove = (id) => {
+        console.log(id);
         Dispatch(Favorite_medicinesRemove(id))
     }
 

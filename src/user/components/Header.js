@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { ThemContext } from '../../context/ThemContext';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import {  LogoutReqest } from '../../reducx/action/auth.action';
+import { LogoutReqest } from '../../reducx/action/auth.action';
 import { Drawer, Button, Placeholder } from 'rsuite';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -51,19 +51,19 @@ function Header({ cartcount1 }) {
 
   console.log(cartcount);
   const handlelogut = () => {
-  Dispatch(LogoutReqest())
-}
+    Dispatch(LogoutReqest())
+  }
 
 
-// console.log(cartcount);
-// const handlelogut = () => {
-//   localStorage.removeItem("login")
-//   // Navigate('/')
-// }
+  // console.log(cartcount);
+  // const handlelogut = () => {
+  //   localStorage.removeItem("login")
+  //   // Navigate('/')
+  // }
 
-const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-return (
+  return (
 
     <div className={`main-header ${them.them}`}>
       <div id="topbar" className={`d-flex align-items-center fixed-top ${them.them}`}>
@@ -109,7 +109,7 @@ return (
               <h2 className="logo-tiny-text me-auto">Multispeciality Hospital</h2>
             </a>
           </div>
-          
+
           <nav id="navbar" className={`navbar order-last order-lg-0 ${them.them}`}>
             <ul>
               <li> <Link to="/" className={`nav-link scrollto ${them.them}`}>Home</Link></li>
@@ -120,10 +120,10 @@ return (
               {/* <li>  <Link to="/Medicines1" className={`nav-link scrollto ${them.them}`}>Medicines1</Link></li> */}
               <li><Link to="/contact" className={`nav-link scrollto ${them.them}`}>Contact</Link></li>
               <li><Link to="/counter" className={`nav-link scrollto ${them.them}`}>counter</Link></li>
-
+              <li><Link to="/useRefEx" className={`nav-link scrollto ${them.them}`}> use REf</Link></li>
 
             </ul>
-             <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i> 
+            <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i>
           </nav>
           <Link to="/appointment" className="appointment-btn scrollto"><span className=" d-md-inline">Make an</span>
             Appointment</Link>
@@ -138,42 +138,42 @@ return (
             } */}
           {
             Auth.user ?
-            <Link to="/" className="appointment-btn scrollto">
-              <span className=" d-inline" onClick={handlelogut}>Logut</span>
-            </Link>
-            :
+              <Link to="/" className="appointment-btn scrollto">
+                <span className=" d-inline" onClick={handlelogut}>Logut</span>
+              </Link>
+              :
               <Link to="/Auth" className="appointment-btn scrollto">
                 <span className="d-inline">Login/ Signup</span>
               </Link>
           }
 
-        </div>   
+        </div>
 
         <div className='drawer'>
-                        <Drawer backdrop={"static"} open={open} onClose={() => setOpen(false)}>
-                            <Drawer.Header>
-                                <Drawer.Title>Navbar List</Drawer.Title>
-                            </Drawer.Header>
-                            <Drawer.Body>
-                                <nav>
-                                    <ul>
-                                        <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
-                                        <li><Link to="/departments" onClick={() => setOpen(false)}>Departments</Link></li>
-                                        <li><Link to="/doctors" onClick={() => setOpen(false)}>Doctors</Link></li>
-                                        <li><Link to="/about" onClick={() => setOpen(false)}>About</Link></li>
-                                        <li><Link to="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
-                                        <li><Link to="/medicine" onClick={() => setOpen(false)}>Medicine</Link></li>
-                                    </ul>
-                                </nav>
-                            </Drawer.Body>
-                        </Drawer>
-                    </div>
+          <Drawer backdrop={"static"} open={open} onClose={() => setOpen(false)}>
+            <Drawer.Header>
+              <Drawer.Title>Navbar List</Drawer.Title>
+            </Drawer.Header>
+            <Drawer.Body>
+              <nav>
+                <ul>
+                  <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
+                  <li><Link to="/departments" onClick={() => setOpen(false)}>Departments</Link></li>
+                  <li><Link to="/doctors" onClick={() => setOpen(false)}>Doctors</Link></li>
+                  <li><Link to="/about" onClick={() => setOpen(false)}>About</Link></li>
+                  <li><Link to="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+                  <li><Link to="/medicine" onClick={() => setOpen(false)}>Medicine</Link></li>
+                </ul>
+              </nav>
+            </Drawer.Body>
+          </Drawer>
+        </div>
       </header>
     </div>
 
 
-);
-}  
+  );
+}
 
 
 export default Header;

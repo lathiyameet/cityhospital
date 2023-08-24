@@ -10,11 +10,11 @@ export const likeReducerdata = (state = initstate, action) => {
     console.log(action);
     switch(action.type){
         case ActionType.FAVORITE_MEDICINES:
-            let Favorite = state.Favorite.some((v) => v.pid === action.payload.pid)
-
+            let Favorite = state.Favorite.find((v) => v.pid === action.payload.pid)
+            let newFav 
             if (Favorite) {
-                let index = state.Favorite.findIndex((v) => v.pid === action.payload.pid)
-                state.Favorite[index].Qty++
+                 newFav = state.Favorite.filter((v) => v.pid !== action.payload.pid)
+                state.Favorite=newFav
             } else {
                 state.Favorite.push(action.payload)
             }

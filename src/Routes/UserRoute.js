@@ -21,6 +21,7 @@ import Cart from '../user/containar/Cart/Cart';
 import Cart1 from '../user/containar/Cart/Cart1';
 import Medicines1 from '../user/containar/MEdicines/Medicines1';
 import Favorite from '../user/containar/MEdicines/Favorite';
+import Refexm from '../user/containar/Refexm';
 
 function UserRoute(props) {
     const [cartcount ,setcartcount] =useState(0)
@@ -52,6 +53,8 @@ function UserRoute(props) {
                 <Route path='/cart1' element={<Cart1/>}/>
                 <Route path='/Medicines1' element={<Medicines1 setcartcount={setcartcount}/>}/>
                 <Route path='/Favorite' element={<Favorite/>}/>
+                <Route path='/useRefEx' element={<Refexm/>}/>
+
 
 
 

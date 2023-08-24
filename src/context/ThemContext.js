@@ -15,11 +15,18 @@ export const  Themprovider = ({children}) => {
 
         dispatch({type:TOGGLE_THEM ,payload:newthem})
     }
+    
+    const tooglethem1 = (Them) => {
+        const newthem = Them === 'dark' ? 'balu' : 'dark'
+
+        dispatch({type:TOGGLE_THEM ,payload:newthem})
+    }
     return (
         <ThemContext.Provider
         value={{
             ...state,
-            tooglethem
+            tooglethem,
+            tooglethem1
         }}       
         >
             {children}
