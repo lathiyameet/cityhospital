@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { object, string, number, date, InferType } from 'yup';
+import { object, string, number, date, InferType, mixed } from 'yup';
 import { Formik, useFormik } from 'formik';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+import { miniSerializeError } from '@reduxjs/toolkit';
 
 function DepartmentForm({onHandlesumit ,update}) {
 
@@ -35,6 +36,7 @@ function DepartmentForm({onHandlesumit ,update}) {
 
     name: string().required(),
     desc: string().required(),
+    prce:mixed().required()
   
   })
 
@@ -42,20 +44,21 @@ function DepartmentForm({onHandlesumit ,update}) {
     const Formik = useFormik({
         initialValues: {
             name: '',
-            desc: ''
+            desc: '',
+            prce:''
            
     
         },
         validationSchema: doctorschema,
         onSubmit: (values, action) => {
-    
+          console.log(values);
           action.resetForm()
           handleClose();
           onHandlesumit(values);
     
         },
       });
-      const { values, handleBlur, handleSubmit, errors, touched, handleChange } = Formik
+      const { values, handleBlur, handleSubmit, errors, touched, handleChange, setValues, setFieldValue } = Formik
     return (
         <>
         {/* <Medicines /> */}
@@ -104,7 +107,13 @@ function DepartmentForm({onHandlesumit ,update}) {
               errors.desc && touched.desc ?
                 <span className='error' style={{ color: 'red' }}>{errors.desc}</span> : null
             }
-            
+            <div className="col-md-4 form-group mt-3">
+                <input type="file" name="prce" className="form-control datepicker"
+                  onChange={(event) => setFieldValue("prce", event.target.files[0])} id="prce" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                {/* <img src={typeof values.prce === "string" ? values.prce : URL.createObjectURL(values.prce)} width={"50px"} height={"50px"} /> */}
+                <span className='error'>{errors.prce && touched.prce ? errors.prce : ''}</span>
+                <div className="validate" />
+              </div>
 
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>

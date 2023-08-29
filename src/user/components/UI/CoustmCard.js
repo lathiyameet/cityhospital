@@ -3,11 +3,16 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from 'react
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { ThemContext } from '../../../context/ThemContext';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSelector } from 'react-redux';
 
 function CoustmCard({ values, btnVal, onclik1, onclik2 }) {
     const them = useContext(ThemContext)
+    const FavoriteData = useSelector(state => state.datalike)
+    const data = FavoriteData.Favorite.map((v) => v.pid)
+    let delete_index = FavoriteData.Favorite.findIndex((m) => m.pid === values.id)
+    console.log(data[delete_index]);
     return (
-        
+
         <Card
             style={{
                 width: '16rem',
@@ -26,19 +31,27 @@ function CoustmCard({ values, btnVal, onclik1, onclik2 }) {
                 <CardTitle tag="h5" className={`${them.them}`}>
                     {values.name}
                     {
-                        onclik2.values?<FavoriteIcon  onClick={() => onclik2(values.id)}/>:
-                    <FavoriteBorderIcon
-                        style={{
-                            position: 'absolute',
-                            right: '30px',
+                        
+                        values.id === data[delete_index] ? <FavoriteIcon
+                            style={{
+                                position: 'absolute',
+                                right: '30px',
+                                color: 'red',
+                            }}
+                            onClick={() => onclik2(values.id)}
+                        /> :
+                            <FavoriteBorderIcon
+                                style={{
+                                    position: 'absolute',
+                                    right: '30px',
 
-                        }}
-                        onClick={() => onclik2(values.id)}
-                    />
-                        
-                        
+                                }}
+                                onClick={() => onclik2(values.id)}
+                            />
+
+
                     }
-                    
+
                     {/* <FavoriteBorderIcon
                         style={{
                             position: 'absolute',

@@ -7,9 +7,12 @@ import { cartdata } from '../../../reducx/action/cart.action';
 import { Favorite_medicines } from '../../../reducx/action/favorite.action';
 import { Addcart } from '../../../reducx/Slice/cartSlice';
 import { ThemContext } from '../../../context/ThemContext';
+import SearchIcon from '@mui/icons-material/Search';
+import { Input } from '@mui/material';
 
 function Medicines(props) {
-  const them =useContext(ThemContext) 
+  const them = useContext(ThemContext)
+  const [search, setsearch] = useState([]);
   const [data, setdata] = useState([]);
   const Dispatch = useDispatch()
   const medicinedata = useSelector(state => state.mediciness)
@@ -39,16 +42,16 @@ function Medicines(props) {
       v.desc.toLowerCase().includes(val.toLowerCase())
     )
     // console.log(Fdata);
-    setdata(fdata)
+    setsearch(fdata)
   }
 
 
   const handlecart = (id) => {
-    Dispatch(Addcart({pid:id , Qty:1}))
-    console.log("handlecart called",id);
+    Dispatch(Addcart({ pid: id, Qty: 1 }))
+    console.log("handlecart called", id);
   }
 
-  const handleFavorit =(id) => {
+  const handleFavorit = (id) => {
     Dispatch(Favorite_medicines(id))
     console.log(id);
   }
@@ -63,10 +66,21 @@ function Medicines(props) {
         </div>
       </div>
       <div className="container">
-        <input type='search' name='search' onChange={(e) => handlechange(e.target.value)} />
+        <div className='row justify-content-center mb-5' style={{
+          // justifyContent:'center'
+          // alignItems:'center'
+        }}>
+          <Input type='search' name='search'
+          style={{
+            width:'40%'
+          }}
+           startAdornment={
+            <SearchIcon />
+          } onChange={(e) => handlechange(e.target.value)} />
+        </div>
         <div className='row'>
           <ListMedicines
-            Mdata={medicinedata.medicine}
+            Mdata={search.length > 0 ? search : medicinedata.medicine}
             handlecart1={handlecart}
             handleFavorit={handleFavorit}
           />

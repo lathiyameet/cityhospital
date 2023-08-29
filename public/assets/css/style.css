@@ -529,6 +529,9 @@ h1, h2, h3, h4, h5, h6 {
   .rs-drawer-left.rs-drawer-sm, .rs-drawer-right.rs-drawer-sm {
     width: 50%;
 }
+.twitter,.facebook,.instagram,.linkedin {
+  display: none !important;
+}
   #hero .container {
     padding-top: 132px;
   }

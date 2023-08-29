@@ -47,7 +47,13 @@ function Header({ cartcount1 }) {
     cartcount = data.reduce((acc, v, i) => acc + v.Qty, 0)
   }
 
+  // /////////////////////////////////////////////
+  const FavoriteData = useSelector(state => state.datalike)
 
+  let countFav = 0;
+  if (FavoriteData.Favorite) {
+    countFav = FavoriteData.Favorite.reduce((acc, v, i) => acc + v.Qty, 0)
+  }
 
   console.log(cartcount);
   const handlelogut = () => {
@@ -90,7 +96,10 @@ function Header({ cartcount1 }) {
                   </IconButton>
                 </Link> */}
               <Link to={'/Favorite'}>
-                <FavoriteIcon />
+                {/* <StyledBadge badgeContent={countFav} color="secondary"> */}
+                  <FavoriteIcon />
+                {/* </StyledBadge>*/}
+
               </Link>
 
             </div>

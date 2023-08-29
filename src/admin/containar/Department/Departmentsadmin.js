@@ -15,77 +15,88 @@ function Departmentsadmin(props) {
     const Dispatch = useDispatch()
     const departments = useSelector(state => state.department)
 
-console.log(departments.department);
+    console.log(departments.department);
 
-    
+
     useEffect(() => {
-      
+
         Dispatch(FetchDepartment())
 
     }, [])
 
 
-   const handleDelete = (id) => {
-        Dispatch(Deletedepartmentdata(id))
-   }
-   const handleUpdate = (data) => {
-    // Dispatch(Editdepartmentdata(data)) 
+    const handleDelete = (data) => {
+        Dispatch(Deletedepartmentdata(data))
+    }
+    const handleUpdate = (data) => {
+        // Dispatch(Editdepartmentdata(data)) 
         setUpdate(data)
-   }
+    }
     const columns = [
 
         { field: 'name', headerName: 'Name', width: 130 },
         { field: 'desc', headerName: 'desc', width: 130 },
         {
+            field:'prce', headerName:'image' ,width:130 , height:100 ,
+            renderCell: (params) => {
+              return(
+                 <div>
+                    <img src={params.row.prce} alt='' class= "img-thumbnail" height="70px" width="50px"/>
+                 </div>
+              )
+
+              }
+        },
+        {
             field: 'action',
             headerName: 'Action',
             width: 130,
             renderCell: (params) => (
-              <>
-                <IconButton aria-label="delete" onClick={() => handleDelete(params.row.id)}>
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="delete" onClick={() => handleUpdate(params.row)}>
-                  <EditIcon />
-                </IconButton>
-      
-              </>
-      
+                <>
+                    <IconButton aria-label="delete" onClick={() => handleDelete(params.row)}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="delete" onClick={() => handleUpdate(params.row)}>
+                        <EditIcon />
+                    </IconButton>
+
+                </>
+
             )
-          },
-     
+        },
+
     ];
 
-const handleSubmit = (data) => {
-    console.log(data);
-    if(update){
-        Dispatch(Editdepartmentdata(data))
-    }else{
-        Dispatch(Adddepartmentdata(data));
+    const handleSubmit = (data) => {
+        console.log(data);
+        if (update) {
+            Dispatch(Editdepartmentdata(data))
+        } else {
+            Dispatch(Adddepartmentdata(data));
 
-    }  
-    setUpdate(null)
-}
+        }
+        setUpdate(null)
+    }
     return (
         <div >
-             <Box height={100} />
-{   
-    departments.isLoading ?<CircularProgress /> :
-    departments.error ? <p>{departments.error}</p>:
-    <>
-    
-     <DepartmentForm onHandlesumit={handleSubmit} update={update}/>
+            <Box height={100} />
+            {
+                departments.isLoading ? <CircularProgress /> :
+                    departments.error ? <p>{departments.error}</p> :
+                        <>
 
-            <div style={{ height: "90vh", width: '100%' }}>
-                <DataGrid
-                    rows={departments.department}
-                    columns={columns}
-                />
-            </div>
-    
-    </>
-}
-       
+                            <DepartmentForm onHandlesumit={handleSubmit} update={update} />
+
+                            <div style={{ height: "90vh", width: '100%' }}>
+                                <DataGrid
+                                    rows={departments.department}
+                                    columns={columns}
+                                />
+                            </div>
+
+                        </>
+            }
+
 
         </div>
     );
