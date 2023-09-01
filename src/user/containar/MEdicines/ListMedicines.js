@@ -8,8 +8,9 @@ function ListMedicines({ Mdata, handlecart1,handleFavorit }) {
             {
                 Mdata.map((v, i) => {
                     return (
-                        <div className='col-md-3 g-2'>
+                        <div className='col-md g-2'>
                             <CoustmCard
+                            
                                 values={v}
                                 btnVal={'ADD to cart'}
                                 onclik1 ={handlecart1}

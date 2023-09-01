@@ -108,7 +108,7 @@ function DepartmentForm({onHandlesumit ,update}) {
                 <span className='error' style={{ color: 'red' }}>{errors.desc}</span> : null
             }
             <div className="col-md-4 form-group mt-3">
-                <input type="file" name="prce" className="form-control datepicker"
+                <input type="file" name="prce"      className="form-control datepicker"
                   onChange={(event) => setFieldValue("prce", event.target.files[0])} id="prce" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                 {/* <img src={typeof values.prce === "string" ? values.prce : URL.createObjectURL(values.prce)} width={"50px"} height={"50px"} /> */}
                 <span className='error'>{errors.prce && touched.prce ? errors.prce : ''}</span>

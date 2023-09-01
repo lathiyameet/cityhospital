@@ -80,7 +80,7 @@ function Header({ cartcount1 }) {
           </div>
           <div className=" d-lg-flex social-links align-items-center">
             <div>
-              <DarkModeIcon onClick={() => them.tooglethem(them.them)}>toogle Them</DarkModeIcon>
+              <DarkModeIcon onClick={() => them.tooglethem(them.them)}></DarkModeIcon>
               <Link to="/cart">
                 <IconButton aria-label="cart" className={`${them.them}`}>
                   <StyledBadge badgeContent={countCart} color="secondary">
@@ -121,15 +121,15 @@ function Header({ cartcount1 }) {
 
           <nav id="navbar" className={`navbar order-last order-lg-0 ${them.them}`}>
             <ul>
-              <li> <Link to="/" className={`nav-link scrollto ${them.them}`}>Home</Link></li>
+              <li> <Link to="/" className={`nav-link scrollto ${them.them} `}>Home</Link></li>
               <li>  <Link to="/departments" className={`nav-link scrollto ${them.them}`}>Departments</Link></li>
               <li>  <Link to="/doctors" className={`nav-link scrollto ${them.them}`}>Doctors</Link></li>
               <li>  <Link to="/about" className={`nav-link scrollto ${them.them}`}>About</Link></li>
               <li>  <Link to="/medicine" className={`nav-link scrollto ${them.them}`}>Medicines</Link></li>
               {/* <li>  <Link to="/Medicines1" className={`nav-link scrollto ${them.them}`}>Medicines1</Link></li> */}
               <li><Link to="/contact" className={`nav-link scrollto ${them.them}`}>Contact</Link></li>
-              <li><Link to="/counter" className={`nav-link scrollto ${them.them}`}>counter</Link></li>
-              <li><Link to="/useRefEx" className={`nav-link scrollto ${them.them}`}> use REf</Link></li>
+              {/* <li><Link to="/counter" className={`nav-link scrollto ${them.them}`}>counter</Link></li>
+              <li><Link to="/useRefEx" className={`nav-link scrollto ${them.them}`}> use REf</Link></li> */}
 
             </ul>
             <i onClick={() => setOpen(true)} class="bi bi-list mobile-nav-toggle"></i>

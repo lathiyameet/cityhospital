@@ -7,7 +7,6 @@ import { ThemContext } from '../../../context/ThemContext';
 
 function Contact(props) {
   const them =useContext(ThemContext) 
-
   let userSchema = object({
     name: string().required(),
     email: string().email().required(),
@@ -21,7 +20,6 @@ function Contact(props) {
       }
     })
   });
-
 
   const formik = useFormik({
     initialValues: {

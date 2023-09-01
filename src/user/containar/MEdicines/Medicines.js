@@ -66,11 +66,11 @@ function Medicines(props) {
         </div>
       </div>
       <div className="container">
-        <div className='row justify-content-center mb-5' style={{
+        <div className={`row justify-content-center mb-5 ${them.them}`} style={{
           // justifyContent:'center'
           // alignItems:'center'
         }}>
-          <Input type='search' name='search'
+          <Input type='search' name='search' className={`${them.them}`}
           style={{
             width:'40%'
           }}

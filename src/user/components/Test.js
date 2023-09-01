@@ -30,7 +30,7 @@ function Test(props) {
                     return true
                 } else {
                     return false
-                }
+                }     
             }
         ),
         DOB: date().required().test('messege', 'Must be in present and past.',
